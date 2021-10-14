@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "F:/Arduino Development/Arduino/libraries/WiFi",
+                "F:/Arduino Development/Arduino/libraries/WiFi/src",
+                "F:/Arduino Development/Arduino/libraries/TFT",
+                "F:/Arduino Development/Arduino/libraries/TFT/src",
+                "F:/Arduino Development/Arduino/libraries/GxEPD2",
+                "F:/Arduino Development/Arduino/libraries/GxEPD2/src",
+                "F:/Arduino Development/Arduino/libraries/TFT/src/utility",
+                "F:/Arduino Development/Arduino/libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/BOARDS/ARDUINO",
+                "F:/Arduino Development/Arduino/libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/DRIVERS/SPI",
+                "F:/Arduino Development/Arduino/libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/UTILS",
+                "F:/Arduino Development/Arduino/libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/UTILS/PREPROCESSOR"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Tools\\MSVC\\14.11.25503\\bin\\HostX64\\x64\\cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}
