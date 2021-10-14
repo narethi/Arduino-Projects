@@ -1,0 +1,2 @@
+# Read Me
+This is a very basic windows application that can interact with my E-Paper module. This contains some very basic functionality of a UI component and an Arduino Driver that can send Serial commands to the Arduino to run an E-Paper display.
