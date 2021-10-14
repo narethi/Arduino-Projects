@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "EpaperUI": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

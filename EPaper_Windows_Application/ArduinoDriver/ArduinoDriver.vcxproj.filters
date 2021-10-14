@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="UnmanagedExceptions">
+      <UniqueIdentifier>{3f5c062d-51d8-474d-87ec-12a522bcd0f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UnmanagedExceptions\Header Files">
+      <UniqueIdentifier>{bbbe6407-335a-4a91-8d6f-2e7d0c0e8002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UnmanagedExceptions\Source Files">
+      <UniqueIdentifier>{d6e6f16a-552d-4d00-b712-206a07a951f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managed Exceptions">
+      <UniqueIdentifier>{a28f46d4-9b0d-4bae-a44f-caff28263588}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managed Exceptions\Header Files">
+      <UniqueIdentifier>{5a86982b-3286-4d1b-bf7e-37cc471445ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managed Exceptions\Source Files">
+      <UniqueIdentifier>{8729e11a-16ca-4f65-a33e-3926720c90d0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ArduinoDriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArduinoSerialCommands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SerialErrorCodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArduinoController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArduinoDeviceException.h">
+      <Filter>UnmanagedExceptions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagedArduinoDeviceException.h">
+      <Filter>Managed Exceptions\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ArduinoDriver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArduinoController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArduinoDeviceException.cpp">
+      <Filter>UnmanagedExceptions\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagedArduinoDeviceException.cpp">
+      <Filter>Managed Exceptions\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
