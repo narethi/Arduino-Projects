@@ -1,2 +1,4 @@
 # Read Me
-This is a very basic windows application that can interact with my E-Paper module. This contains some very basic functionality of a UI component and an Arduino Driver that can send Serial commands to the Arduino to run an E-Paper display.
+This is a very basic windows application that can interact with my E-Paper module. This contains some very basic functionality of a UI component and an Arduino Driver that can send Serial commands to the Arduino to run an E-Paper display. I have on purposely chosen not to use the MVVM framework, for two reason:
+* First I wanted to show that I understand all of the underlying mechanics and concepts of the WPF framework, which is best displayed without the use of additional frameworks
+* Second I don't like Microsoft MVVM framework as I find that it simplifies the implementation of WPF too much that it makes it difficult to do truly complex operations 
