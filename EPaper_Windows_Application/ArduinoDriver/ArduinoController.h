@@ -1,20 +1,15 @@
 #pragma once
 
-#include "ArduinoSerialCommands.h"
-#include <string>
+using namespace System;
 
-class ArduinoController
+namespace Arduino
 {
-private:
-	bool Initialize();
-	void RunCommand(ArduinoSerialCommand command, int argumentCount, ...);
-	void WriteToSerialBus(std::string serialData);
-	void ReadFromSerialBus();
-public:
-	ArduinoController();
-	~ArduinoController();
-	void SetDisplayToBlockMode();
-	void SetDisplayToStaticMode();
-	void SetDisplayToText(std::string text);
-};
-
+	public ref class Controller
+	{
+	public:
+		Controller();
+		~Controller();
+		// TODO: Add your methods for this class here.
+		void SetMode(System::String^ selectedMode);
+	};
+}

@@ -8,6 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Views:EPaperControl/>
+        <Views:EPaperControl SetMode="EPaperControl_SetMode"/>
     </Grid>
 </Window>

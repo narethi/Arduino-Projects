@@ -1,27 +1,18 @@
 ﻿
-using ArduinoDriver;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using ArduinoExceptions;
+using EpaperUI.EventTypes;
 
 namespace EpaperUI.ViewModel
 {
     public class EPaperControlViewModel : INotifyPropertyChanged
     {
-        private readonly Driver arduinoControl;
-
         public EPaperControlViewModel()
         {
-            try
-            {
-                arduinoControl = new();
-            }
-            catch (DeviceException e)
-            {
-                var test = e.ReadError();
-            }
         }
+
+        public event SetModeHandler HandleSetMode;
 
         private List<string> _modeString = new List<string>()
         {
@@ -46,7 +37,7 @@ namespace EpaperUI.ViewModel
             set
             {
                 _selectedMode = value;
-                arduinoControl.SetMode(_modeString[_selectedMode]);
+                HandleSetMode?.Invoke(_modeString[_selectedMode]);
                 OnPropertyChanged();
             }
         }

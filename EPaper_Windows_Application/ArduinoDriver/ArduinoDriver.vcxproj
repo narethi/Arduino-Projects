@@ -121,9 +121,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ArduinoController.h" />
-    <ClInclude Include="ArduinoDeviceException.h" />
     <ClInclude Include="ArduinoDriver.h" />
+    <ClInclude Include="ArduinoDeviceException.h" />
+    <ClInclude Include="ArduinoController.h" />
     <ClInclude Include="ArduinoSerialCommands.h" />
     <ClInclude Include="ManagedArduinoDeviceException.h" />
     <ClInclude Include="pch.h" />
@@ -131,7 +131,7 @@
     <ClInclude Include="SerialErrorCodes.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ArduinoController.cpp">
+    <ClCompile Include="ArduinoDriver.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
@@ -143,7 +143,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="ArduinoDriver.cpp" />
+    <ClCompile Include="ArduinoController.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="ManagedArduinoDeviceException.cpp" />
     <ClCompile Include="pch.cpp">

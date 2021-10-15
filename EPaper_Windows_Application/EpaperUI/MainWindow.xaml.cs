@@ -20,9 +20,18 @@ namespace EpaperUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        public IApplicationController ApplicationController;
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void EPaperControl_SetMode(object sender, RoutedEventArgs e)
+        {
+            if(e is SetModeRoutedEventArgs setModeArgs)
+            {
+                ApplicationController.SetMode(setModeArgs.Mode);
+            }
         }
     }
 }

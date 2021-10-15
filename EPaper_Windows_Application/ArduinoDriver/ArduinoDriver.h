@@ -1,15 +1,20 @@
 #pragma once
 
-using namespace System;
+#include "ArduinoSerialCommands.h"
+#include <string>
 
-namespace ArduinoDriver 
+class ArduinoDriver
 {
-	public ref class Driver
-	{
-	public:
-		Driver();
-		~Driver();
-		// TODO: Add your methods for this class here.
-		void SetMode(System::String^ selectedMode);
-	};
-}
+private:
+	bool Initialize();
+	void RunCommand(ArduinoSerialCommand command, int argumentCount, ...);
+	void WriteToSerialBus(std::string serialData);
+	void ReadFromSerialBus();
+public:
+	ArduinoDriver();
+	~ArduinoDriver();
+	void SetDisplayToBlockMode();
+	void SetDisplayToStaticMode();
+	void SetDisplayToText(std::string text);
+};
+

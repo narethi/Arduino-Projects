@@ -33,7 +33,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArduinoDriver.h">
+    <ClInclude Include="ArduinoController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
@@ -48,7 +48,7 @@
     <ClInclude Include="SerialErrorCodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ArduinoController.h">
+    <ClInclude Include="ArduinoDriver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ArduinoDeviceException.h">
@@ -59,7 +59,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ArduinoDriver.cpp">
+    <ClCompile Include="ArduinoController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -68,7 +68,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ArduinoController.cpp">
+    <ClCompile Include="ArduinoDriver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ArduinoDeviceException.cpp">
