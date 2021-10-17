@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ManagedArduinoDeviceException.h"
 
+
 using namespace ArduinoExceptions;
 using namespace Arduino::Shared;
 
@@ -9,17 +10,17 @@ Enums::SerialErrorCodes^ ConvertErrorCodes(SerialErrorCodes code)
 {
 	switch (code)
 	{
-		case FailedToFindDevice:
+	case SerialErrorCodes::FailedToFindDevice:
 			return Enums::SerialErrorCodes::FailedToFindDevice;
-		case FailedToGetDeviceState:
+		case SerialErrorCodes::FailedToGetDeviceState:
 			return Enums::SerialErrorCodes::FailedToGetDeviceState;
-		case FailedToSetDeviceState:
+		case SerialErrorCodes::FailedToSetDeviceState:
 			return Enums::SerialErrorCodes::FailedToSetDeviceState;
-		case FailedToSetTimeout:
+		case SerialErrorCodes::FailedToSetTimeout:
 			return Enums::SerialErrorCodes::FailedToSetTimeout;
-		case FailedToWriteBuffer:
+		case SerialErrorCodes::FailedToWriteBuffer:
 			return Enums::SerialErrorCodes::FailedToWriteBuffer;
-		case FailedToReadBuffer:
+		case SerialErrorCodes::FailedToReadBuffer:
 			return Enums::SerialErrorCodes::FailedToReadBuffer;
 		default:
 			return Enums::SerialErrorCodes::UnknownError;

@@ -1,9 +1,8 @@
 ﻿using EpaperUI.Controllers;
+using EpaperUI.EventTypes;
+using EpaperUI.Model;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EpaperUI
@@ -13,15 +12,62 @@ namespace EpaperUI
         public MessageController MessageController { get; private set; }
         public ArduinoController ArduinoController { get; private set; }
 
+        public event ShowMessageHandler ShowMessage;
+
+        public object MessageLock = new();
         public ApplicationController()
         {
-            ArduinoController = new();
+            //The order matters here, we need to set up the message handler immediately so that it can be used to show messages
+            //About the other controllers when errors occur
             MessageController = new();
+            MessageController.ShowMessage += OnShowMessage;
+            try
+            {
+                ArduinoController = new();
+                ArduinoController.InitializeController();
+            }
+            catch(Exception e)
+            {
+                MessageController.SetErrorFromException(e);
+            }
         }
 
         public void SetMode(string mode)
         {
-            ArduinoController.SetMode(mode);
+            if(ArduinoController.ArduinoControlInitialized == false)
+            {
+                MessageController.SetErrorMessage("Failed to set mode to {0} for arduino connected to port {1}", mode, "COM8");
+                return;
+            }
+            try
+            {
+                ArduinoController.SetMode(mode);
+            }
+            catch (Exception e)
+            {
+                MessageController.SetErrorFromException(e);
+            }
+        }
+
+        private void OnShowMessage(MessageDataContract messageData)
+        {
+            //There is a race condition in the start up where the message controller gets called
+            //before the message receiver is initialized, to handle this the messaging thread
+            //will be held up by this lock until the message has some where to go
+            //An alternative is to keep the list of all system messages in a list some where and
+            //access it at start up
+            lock(MessageLock)
+            {
+                while(ShowMessage == null)
+                {
+                    //This isn't a high priority task so wait for a
+                    //second before checking again to keep the
+                    //polling fairly low rate
+                    Task.Delay(1000);
+                }
+                ShowMessage?.Invoke(messageData);
+            }
+            
         }
 
         #region IDisposable Implementation
@@ -36,7 +82,8 @@ namespace EpaperUI
         {
             if (!_isDisposed)
             {
-                ArduinoController.Dispose();
+                ArduinoController?.Dispose();
+                MessageController.ShowMessage -= ShowMessage;
                 _isDisposed = true;
             }
         }

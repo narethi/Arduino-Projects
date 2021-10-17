@@ -1,6 +1,6 @@
 #pragma once
 
-enum ArduinoSerialCommand
+enum class ArduinoSerialCommand
 {
 	RunBlocks = 1,
 	RunText = 2,

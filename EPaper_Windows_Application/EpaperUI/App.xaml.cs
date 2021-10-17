@@ -32,10 +32,14 @@ namespace EpaperUI
                 ApplicationController = _applicationController
             };
 
+            _applicationController.ShowMessage += applicationWindow.OnShowMessage;
+
             //Open as a modal dialog
             applicationWindow.ShowDialog();
 
             //Run the application controller clean up
+            _applicationController.ShowMessage -= applicationWindow.OnShowMessage;
+            applicationWindow.Dispose();
             Dispose(true);
 
             //Close the applicaiton, use 0 to show that the close is successful

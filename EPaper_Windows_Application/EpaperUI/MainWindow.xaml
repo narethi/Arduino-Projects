@@ -4,10 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EpaperUI"
-        xmlns:Views="clr-namespace:EpaperUI.Views" x:Class="EpaperUI.MainWindow"
+        xmlns:View="clr-namespace:EpaperUI.View" x:Class="EpaperUI.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Views:EPaperControl SetMode="EPaperControl_SetMode"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <View:EPaperControl Grid.Column="0" SetMode="EPaperControl_SetMode"/>
+        <View:MessageControl Grid.Column="1" Messages="{Binding RelativeSource={RelativeSource AncestorType=local:MainWindow}, Path=DataContext.Messages}"/>
     </Grid>
 </Window>

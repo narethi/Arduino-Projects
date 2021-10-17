@@ -3,7 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace EpaperUI.Views
+namespace EpaperUI.View
 {
     /// <summary>
     /// Interaction logic for EPaperControl.xaml

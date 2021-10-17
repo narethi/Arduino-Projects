@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EpaperUI", "EpaperUI\Epaper
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArduinoDriver", "ArduinoDriver\ArduinoDriver.vcxproj", "{C0D592B6-4519-405C-BB4B-1FC74633D0D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arduino.Shared", "Arduino.Shared\Arduino.Shared.csproj", "{B8C6927F-DD6C-405B-8F38-9FE574B148F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arduino.Shared", "Arduino.Shared\Arduino.Shared.csproj", "{B8C6927F-DD6C-405B-8F38-9FE574B148F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{122F27EE-F185-4293-85CD-9F0A0F7CCF60}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.md = ReadMe.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

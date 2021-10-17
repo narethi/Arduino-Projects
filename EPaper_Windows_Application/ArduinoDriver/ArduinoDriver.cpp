@@ -101,7 +101,7 @@ void ArduinoDriver::WriteToSerialBus(std::string serialData)
 	DWORD dwWriteBuffer = 0;
 	if (!WriteFile(ArduinoHandle, serialData.c_str(), serialData.size(), &dwWriteBuffer, NULL))
 	{
-		exit(SerialErrorCodes::FailedToWriteBuffer);
+		throw ArduinoDeviceException(SerialErrorCodes::FailedToWriteBuffer);
 	}
 }
 
@@ -111,7 +111,7 @@ void ArduinoDriver::ReadFromSerialBus()
 	DWORD dwBytesRead = 0;
 	if (!ReadFile(ArduinoHandle, szBuff, MAX_ARRAY_SIZE, &dwBytesRead, NULL))
 	{
-		exit(SerialErrorCodes::FailedToReadBuffer);
+		throw ArduinoDeviceException(SerialErrorCodes::FailedToReadBuffer);
 	}
 
 	std::wostringstream oss;  // uses wchar_t characters (UNICODE)

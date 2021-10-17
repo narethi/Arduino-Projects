@@ -1,6 +1,6 @@
 #pragma once
 
-enum SerialErrorCodes
+enum class SerialErrorCodes
 {
 	UnknownError = 0,
 	FailedToFindDevice = 1,

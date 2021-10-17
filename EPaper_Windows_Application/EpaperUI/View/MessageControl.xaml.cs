@@ -1,4 +1,7 @@
-﻿using EpaperUI.ViewModel;
+﻿using EpaperUI.Model;
+using EpaperUI.ViewModel;
+using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace EpaperUI.View
@@ -13,6 +16,26 @@ namespace EpaperUI.View
         {
             InitializeComponent();
             DataContext = _viewModel;
+        }
+
+        public static readonly DependencyProperty MessagesProperty = 
+            DependencyProperty.Register("Messages", 
+            typeof(ObservableCollection<MessageDataContract>),
+            typeof(MessageControl), new FrameworkPropertyMetadata() { PropertyChangedCallback =  OnCollectionChanged }
+        );
+
+        public ObservableCollection<MessageDataContract> Messages 
+        {
+            get => (ObservableCollection<MessageDataContract>)GetValue(MessagesProperty);
+            set => SetValue(MessagesProperty, value);
+        }
+
+        private static void OnCollectionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if(d is MessageControl control)
+            {
+                control._viewModel.Messages = (ObservableCollection<MessageDataContract>)e.NewValue;
+            }
         }
     }
 }

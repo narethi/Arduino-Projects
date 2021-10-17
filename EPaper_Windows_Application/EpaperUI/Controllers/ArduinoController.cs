@@ -9,11 +9,15 @@ namespace EpaperUI
 {
     public class ArduinoController : IDisposable
     {
-        private readonly Controller _arduinoController;
-        public bool ArduinoControlInitialized { get; private set; }
-        public SerialErrorCodes LastError { get; private set; }
+        private Controller _arduinoController;
+        public bool ArduinoControlInitialized { get; private set; } = false;
+        public SerialErrorCodes LastError { get; private set; } = SerialErrorCodes.UnknownError;
 
         public ArduinoController()
+        {
+        }
+
+        public void InitializeController()
         {
             try
             {
@@ -24,6 +28,7 @@ namespace EpaperUI
             {
                 ArduinoControlInitialized = false;
                 LastError = (SerialErrorCodes)e.ReadError();
+                throw;
             }
         }
 
@@ -37,11 +42,17 @@ namespace EpaperUI
 
         #if DEBUG
         private string _caller = Environment.StackTrace;
-        #endif
+#endif
 
         public void Dispose()
         {
-            if(!_isDisposed)
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        public void Dispose(bool isDisposing)
+        {
+            if(!isDisposing)
             {
                 _arduinoController?.Dispose();
                 _isDisposed = true;
@@ -51,7 +62,7 @@ namespace EpaperUI
         ~ArduinoController()
         {
             Debug.Assert(!_isDisposed, "Failed to dispose the ArduinoController in the application controller");
-            GC.SuppressFinalize(this);
+            Dispose(false);
         }
 
         #endregion
