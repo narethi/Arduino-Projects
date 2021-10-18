@@ -63,6 +63,22 @@ bool ArduinoDriver::Initialize()
 	return true;
 }
 
+void ArduinoDriver::CheckDeviceCommState()
+{
+	if (ArduinoHandle == INVALID_HANDLE_VALUE)
+	{
+		throw ArduinoDeviceException(SerialErrorCodes::FailedToFindDevice);
+	}
+
+	DCB dcbArduinoSerialParams = { 0 };
+
+	dcbArduinoSerialParams.DCBlength = sizeof(dcbArduinoSerialParams);
+	if (!GetCommState(ArduinoHandle, &dcbArduinoSerialParams))
+	{
+		throw ArduinoDeviceException(SerialErrorCodes::FailedToGetDeviceState);
+	}
+}
+
 void ArduinoDriver::SetDisplayToBlockMode()
 {
 	RunCommand(ArduinoSerialCommand::RunBlocks, 0);
@@ -99,6 +115,7 @@ void ArduinoDriver::RunCommand(ArduinoSerialCommand command, int argumentCount, 
 void ArduinoDriver::WriteToSerialBus(std::string serialData)
 {
 	DWORD dwWriteBuffer = 0;
+	CheckDeviceCommState();
 	if (!WriteFile(ArduinoHandle, serialData.c_str(), serialData.size(), &dwWriteBuffer, NULL))
 	{
 		throw ArduinoDeviceException(SerialErrorCodes::FailedToWriteBuffer);

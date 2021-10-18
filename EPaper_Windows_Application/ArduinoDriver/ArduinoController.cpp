@@ -29,19 +29,26 @@ Controller::~Controller()
 
 void Controller::SetMode(System::String^ selectedMode)
 {
-	if (arduino != nullptr)
+	try
 	{
-		if (selectedMode == "Text")
+		if (arduino != nullptr)
 		{
-			arduino->SetDisplayToText("This is from my managed layer");
+			if (selectedMode == "Text")
+			{
+				arduino->SetDisplayToText("This is from my managed layer");
+			}
+			else if (selectedMode == "Blocks")
+			{
+				arduino->SetDisplayToBlockMode();
+			}
+			else if (selectedMode == "Static")
+			{
+				arduino->SetDisplayToStaticMode();
+			}
 		}
-		else if (selectedMode == "Blocks")
-		{
-			arduino->SetDisplayToBlockMode();
-		}
-		else if (selectedMode == "Static")
-		{
-			arduino->SetDisplayToStaticMode();
-		}
+	}
+	catch (ArduinoDeviceException e)
+	{
+		throw gcnew DeviceException(e.ReadError());
 	}
 }

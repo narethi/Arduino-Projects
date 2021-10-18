@@ -24,12 +24,18 @@ namespace EpaperUI
             try
             {
                 ArduinoController = new();
-                ArduinoController.InitializeController();
+                EstablishArduinoConnection();
             }
             catch(Exception e)
             {
                 MessageController.SetErrorFromException(e);
             }
+        }
+
+        public void EstablishArduinoConnection()
+        {
+            ArduinoController.InitializeController();
+            MessageController.SetInfoMessage("Successfully Connected to Arduino on port {0}", "COM8");
         }
 
         public void SetMode(string mode)
@@ -39,9 +45,11 @@ namespace EpaperUI
                 MessageController.SetErrorMessage("Failed to set mode to {0} for arduino connected to port {1}", mode, "COM8");
                 return;
             }
+
             try
             {
                 ArduinoController.SetMode(mode);
+                MessageController.SetInfoMessage("Successfully set mode to {0} for Arduino on port {1}", mode, "COM8");
             }
             catch (Exception e)
             {

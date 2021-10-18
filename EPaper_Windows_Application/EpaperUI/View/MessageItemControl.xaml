@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="EpaperUI.View.MessageItem"
+﻿<UserControl x:Class="EpaperUI.View.MessageItemControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,12 @@
              xmlns:local="clr-namespace:EpaperUI.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <Grid Margin="0,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label HorizontalContentAlignment="Center" Background="{Binding BackgroundColour}" Content="{Binding MessageLabel}"/>
+        <Label Grid.Column="1" Content="{Binding MessageString}"/>
     </Grid>
 </UserControl>

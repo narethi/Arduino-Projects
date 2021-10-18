@@ -14,8 +14,8 @@
         <StackPanel Margin="10,5,10,0">
             <Label Content="Mode"/>
             <ComboBox Grid.Row="0" Margin="0,5,0,0" 
-                      SelectedIndex="{Binding RelativeSource={RelativeSource AncestorType=local:EPaperControl}, Path=DataContext.SelectedMode, Mode=TwoWay}" 
-                      ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=local:EPaperControl}, Path=DataContext.ModeString}" HorizontalContentAlignment="Center"/>
+                      SelectedIndex="{Binding Path=SelectedMode, Mode=TwoWay}" 
+                      ItemsSource="{Binding ModeString}" HorizontalContentAlignment="Center"/>
         </StackPanel>
     </Grid>
 </UserControl>

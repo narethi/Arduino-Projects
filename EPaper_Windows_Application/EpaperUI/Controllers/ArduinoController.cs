@@ -1,5 +1,4 @@
-﻿
-using Arduino;
+﻿using Arduino;
 using Arduino.Shared.Enums;
 using ArduinoExceptions;
 using System;
@@ -13,14 +12,22 @@ namespace EpaperUI
         public bool ArduinoControlInitialized { get; private set; } = false;
         public SerialErrorCodes LastError { get; private set; } = SerialErrorCodes.UnknownError;
 
+        private ArduinoMonitor _monitor = new();
+
         public ArduinoController()
         {
+        }
+
+        private void RunMonitor()
+        {
+
         }
 
         public void InitializeController()
         {
             try
             {
+                _arduinoController?.Dispose();
                 _arduinoController = new();
                 ArduinoControlInitialized = true;
             }
@@ -34,7 +41,16 @@ namespace EpaperUI
 
         public void SetMode(string mode)
         {
-            _arduinoController.SetMode(mode);
+            try
+            {
+                _arduinoController.SetMode(mode);
+            }
+            catch (DeviceException e)
+            {
+                ArduinoControlInitialized = false;
+                LastError = (SerialErrorCodes)e.ReadError();
+                throw;
+            }
         }
 
         #region IDisposable Implementation

@@ -19,22 +19,25 @@ namespace EpaperUI.View
         }
 
         public static readonly DependencyProperty MessagesProperty = 
-            DependencyProperty.Register("Messages", 
+            DependencyProperty.Register(nameof(Messages), 
             typeof(ObservableCollection<MessageDataContract>),
-            typeof(MessageControl), new FrameworkPropertyMetadata() { PropertyChangedCallback =  OnCollectionChanged }
+            typeof(MessageControl), new FrameworkPropertyMetadata() { PropertyChangedCallback =  OnDependencyPropertyChanged }
         );
 
-        public ObservableCollection<MessageDataContract> Messages 
+        public ObservableCollection<MessageDataContract> Messages
         {
             get => (ObservableCollection<MessageDataContract>)GetValue(MessagesProperty);
             set => SetValue(MessagesProperty, value);
         }
 
-        private static void OnCollectionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnDependencyPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if(d is MessageControl control)
             {
-                control._viewModel.Messages = (ObservableCollection<MessageDataContract>)e.NewValue;
+                if(e.Property.Name == nameof(Messages))
+                {
+                    control._viewModel.Messages = (ObservableCollection<MessageDataContract>)e.NewValue;
+                }
             }
         }
     }

@@ -15,9 +15,9 @@ namespace EpaperUI.Controllers
             throw new NotImplementedException();
         }
 
-        public void SetInfoMessage(string message, params object[] formatOptions)
+        public async void SetInfoMessage(string message, params object[] formatOptions)
         {
-            throw new NotImplementedException();
+            await SetMessage(MessageTypeCode.Info, message, formatOptions);
         }
 
         public async void SetErrorMessage(string message, params object[] formatOptions)

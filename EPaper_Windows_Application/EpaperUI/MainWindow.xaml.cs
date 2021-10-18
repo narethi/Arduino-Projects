@@ -33,6 +33,11 @@ namespace EpaperUI
             }
         }
 
+        private void ResetArduino_Click(object sender, RoutedEventArgs e)
+        {
+            ApplicationController.EstablishArduinoConnection();
+        }
+
         #region IDisposable Implementation
         private bool _isDisposed = false;
 

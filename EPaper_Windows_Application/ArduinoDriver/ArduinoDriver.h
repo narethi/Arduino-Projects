@@ -10,6 +10,7 @@ private:
 	void RunCommand(ArduinoSerialCommand command, int argumentCount, ...);
 	void WriteToSerialBus(std::string serialData);
 	void ReadFromSerialBus();
+	void CheckDeviceCommState();
 public:
 	ArduinoDriver();
 	~ArduinoDriver();
