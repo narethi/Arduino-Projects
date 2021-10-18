@@ -27,6 +27,18 @@ Controller::~Controller()
 	delete arduino;
 }
 
+void Controller::CheckDeviceState()
+{
+	try
+	{
+		arduino->CheckDeviceCommState();
+	}
+	catch (ArduinoDeviceException e)
+	{
+		throw gcnew DeviceException(e.ReadError());
+	}
+}
+
 void Controller::SetMode(System::String^ selectedMode)
 {
 	try

@@ -1,34 +1,55 @@
 ﻿using Arduino;
 using Arduino.Shared.Enums;
 using ArduinoExceptions;
+using EpaperUI.EventTypes;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace EpaperUI
 {
     public class ArduinoController : IDisposable
     {
         private Controller _arduinoController;
+        private ArduinoMonitor _monitor;
+        public event ProcessExceptionHandler ProcessTimerException;
         public bool ArduinoControlInitialized { get; private set; } = false;
         public SerialErrorCodes LastError { get; private set; } = SerialErrorCodes.UnknownError;
-
-        private ArduinoMonitor _monitor = new();
 
         public ArduinoController()
         {
         }
 
-        private void RunMonitor()
-        {
 
+        public void RunMonitor()
+        {
+            _monitor.StartMonitor();
+        }
+
+        public void StopMonitor()
+        {
+            _monitor.StopMonitor();
+        }
+
+        private void ResetMonitor()
+        {
+            if(_monitor != null)
+            {
+                _monitor.StopMonitor();
+                _monitor.TimerCompleted -= ProcessTimerException;
+            }
+            
+            _monitor = new(_arduinoController);
+            _monitor.TimerCompleted += ProcessTimerException;
         }
 
         public void InitializeController()
         {
             try
-            {
+            {   
                 _arduinoController?.Dispose();
                 _arduinoController = new();
+                ResetMonitor();
                 ArduinoControlInitialized = true;
             }
             catch (DeviceException e)

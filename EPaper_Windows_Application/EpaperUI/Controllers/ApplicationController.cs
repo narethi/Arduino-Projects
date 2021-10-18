@@ -24,6 +24,7 @@ namespace EpaperUI
             try
             {
                 ArduinoController = new();
+                ArduinoController.ProcessTimerException += MessageController.SetErrorFromException;
                 EstablishArduinoConnection();
             }
             catch(Exception e)
@@ -36,6 +37,7 @@ namespace EpaperUI
         {
             ArduinoController.InitializeController();
             MessageController.SetInfoMessage("Successfully Connected to Arduino on port {0}", "COM8");
+            ArduinoController.RunMonitor();
         }
 
         public void SetMode(string mode)
@@ -92,6 +94,7 @@ namespace EpaperUI
             {
                 ArduinoController?.Dispose();
                 MessageController.ShowMessage -= ShowMessage;
+                ArduinoController.ProcessTimerException -= MessageController.SetErrorFromException;
                 _isDisposed = true;
             }
         }

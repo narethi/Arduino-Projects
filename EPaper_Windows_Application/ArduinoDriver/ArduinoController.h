@@ -9,7 +9,7 @@ namespace Arduino
 	public:
 		Controller();
 		~Controller();
-		// TODO: Add your methods for this class here.
 		void SetMode(System::String^ selectedMode);
+		void CheckDeviceState();
 	};
 }

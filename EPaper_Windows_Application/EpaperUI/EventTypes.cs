@@ -1,4 +1,5 @@
 ﻿using EpaperUI.Model;
+using System;
 
 //Note that I am not making specific overrides of the event args classes or requiring these delegates to keep track of sender
 //I find that parctice to provide more data than necessary when handling most events, in cases like routed events or events to be
@@ -16,4 +17,10 @@ namespace EpaperUI.EventTypes
     /// </summary>
     /// <param name="messageData">This is a message contract that contains the data needed for displaying a message in a message control</param>
     public delegate void ShowMessageHandler(MessageDataContract messageData);
+
+    /// <summary>
+    /// This is a delegate that is used to handle events that are to handle exceptions when they occur
+    /// </summary>
+    /// <param name="exception">This is the exception to handle</param>
+    public delegate void ProcessExceptionHandler(Exception exception);
 }
