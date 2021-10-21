@@ -1,17 +1,12 @@
 ﻿using Arduino.Shared.Enums;
 using EpaperUI.Model;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace EpaperUI.ViewModel
 {
-    public class MessageItemViewModel : INotifyPropertyChanged
+    public class MessageItemViewModel : BaseViewModel
     {
         private MessageDataContract _messageData = new();
         public MessageDataContract MessageData 
@@ -64,16 +59,5 @@ namespace EpaperUI.ViewModel
                 return Brushes.White;
             }
         }
-
-        #region INotifyPropertyChanged Implemenation
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
     }
 }

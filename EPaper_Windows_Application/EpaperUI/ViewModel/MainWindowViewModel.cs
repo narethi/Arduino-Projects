@@ -5,19 +5,8 @@ using System.Runtime.CompilerServices;
 
 namespace EpaperUI.ViewModel
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : BaseViewModel
     {
         public ObservableCollection<MessageDataContract> Messages { get; set; } = new();
-
-        #region INotifyPropertyChanged Implemenation
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
     }
 }

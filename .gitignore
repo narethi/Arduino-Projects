@@ -5,3 +5,5 @@ EPaper_Windows_Application/Arduino.Shared/bin
 EPaper_Windows_Application/ArduinoDriver/Debug
 EPaper_Windows_Application/EpaperUI/bin
 EPaper_Windows_Application/EpaperUI/obj
+EPaper_Windows_Application/EpaperUI.Test/bin
+EPaper_Windows_Application/EpaperUI.Test/obj

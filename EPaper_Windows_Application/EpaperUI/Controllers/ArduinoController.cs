@@ -4,7 +4,6 @@ using ArduinoExceptions;
 using EpaperUI.EventTypes;
 using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace EpaperUI
 {
@@ -33,6 +32,7 @@ namespace EpaperUI
 
         private void ResetMonitor()
         {
+            //TODO: Fix This leak
             if(_monitor != null)
             {
                 _monitor.StopMonitor();

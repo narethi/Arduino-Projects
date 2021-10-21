@@ -6,7 +6,7 @@ using EpaperUI.EventTypes;
 
 namespace EpaperUI.ViewModel
 {
-    public class EPaperControlViewModel : INotifyPropertyChanged
+    public class EPaperControlViewModel : BaseViewModel
     {
         public EPaperControlViewModel()
         {
@@ -41,16 +41,5 @@ namespace EpaperUI.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        #region INotifyPropertyChanged Implemenation
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
     }
 }
