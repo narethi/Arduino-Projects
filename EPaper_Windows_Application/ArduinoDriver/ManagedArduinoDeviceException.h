@@ -13,6 +13,7 @@ namespace ArduinoExceptions
 		Enums::SerialErrorCodes^ _error;
 	public:
 		DeviceException(SerialErrorCodes error);
+		DeviceException(Enums::SerialErrorCodes^ error);
 		Enums::SerialErrorCodes^ ReadError();
 	};
 }

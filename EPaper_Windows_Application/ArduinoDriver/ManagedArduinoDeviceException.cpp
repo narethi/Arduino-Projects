@@ -32,6 +32,11 @@ DeviceException::DeviceException(SerialErrorCodes error)
 	_error = ConvertErrorCodes(error);
 }
 
+DeviceException::DeviceException(Enums::SerialErrorCodes^ error)
+{
+	_error = error;
+}
+
 Enums::SerialErrorCodes^ DeviceException::ReadError()
 {
 	return _error;

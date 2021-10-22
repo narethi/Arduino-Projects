@@ -95,5 +95,68 @@ namespace EpaperUI.Properties {
                 return ResourceManager.GetString("MessageWarningLabel", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to find device on port {0}.
+        /// </summary>
+        public static string UnableToFindDevice {
+            get {
+                return ResourceManager.GetString("UnableToFindDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to read the device comm state for the device on port {0}.
+        /// </summary>
+        public static string UnableToGetDeviceState {
+            get {
+                return ResourceManager.GetString("UnableToGetDeviceState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to read the buffer from the device on port {0}.
+        /// </summary>
+        public static string UnableToReadDeviceBuffer {
+            get {
+                return ResourceManager.GetString("UnableToReadDeviceBuffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to update the device comm state on port {0}.
+        /// </summary>
+        public static string UnableToSetDeviceState {
+            get {
+                return ResourceManager.GetString("UnableToSetDeviceState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to set the timeout for the device on port {0}.
+        /// </summary>
+        public static string UnableToSetTimeout {
+            get {
+                return ResourceManager.GetString("UnableToSetTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to write to device on port {0}.
+        /// </summary>
+        public static string UnableToWriteDeviceBuffer {
+            get {
+                return ResourceManager.GetString("UnableToWriteDeviceBuffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot identify error.
+        /// </summary>
+        public static string UnknownError {
+            get {
+                return ResourceManager.GetString("UnknownError", resourceCulture);
+            }
+        }
     }
 }

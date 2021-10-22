@@ -133,4 +133,32 @@
     <value>WARNING</value>
     <comment>Used by message item for label value</comment>
   </data>
+  <data name="UnableToFindDevice" xml:space="preserve">
+    <value>Unable to find device on port {0}</value>
+    <comment>Used by Message Controller</comment>
+  </data>
+  <data name="UnableToGetDeviceState" xml:space="preserve">
+    <value>Unable to read the device comm state for the device on port {0}</value>
+    <comment>Used by Message Controller</comment>
+  </data>
+  <data name="UnableToReadDeviceBuffer" xml:space="preserve">
+    <value>Unable to read the buffer from the device on port {0}</value>
+    <comment>Used by Message Controller</comment>
+  </data>
+  <data name="UnableToSetDeviceState" xml:space="preserve">
+    <value>Unable to update the device comm state on port {0}</value>
+    <comment>Used by Message Controller</comment>
+  </data>
+  <data name="UnableToSetTimeout" xml:space="preserve">
+    <value>Unable to set the timeout for the device on port {0}</value>
+    <comment>Used by Message Controller</comment>
+  </data>
+  <data name="UnableToWriteDeviceBuffer" xml:space="preserve">
+    <value>Unable to write to device on port {0}</value>
+    <comment>Used by Message Controller</comment>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Cannot identify error</value>
+    <comment>Used by Message Controller</comment>
+  </data>
 </root>

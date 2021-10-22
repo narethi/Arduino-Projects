@@ -1,6 +1,7 @@
 ﻿using Arduino.Shared.Enums;
 using ArduinoExceptions;
 using EpaperUI.EventTypes;
+using EpaperUI.Properties;
 using System;
 using System.Threading.Tasks;
 
@@ -10,9 +11,9 @@ namespace EpaperUI.Controllers
     {
         public event ShowMessageHandler ShowMessage;
 
-        public void SetWarningMessage(string message, params object[] formatOptions)
+        public async void SetWarningMessage(string message, params object[] formatOptions)
         {
-            throw new NotImplementedException();
+            await SetMessage(MessageTypeCode.Warning, message, formatOptions);
         }
 
         public async void SetInfoMessage(string message, params object[] formatOptions)
@@ -39,19 +40,19 @@ namespace EpaperUI.Controllers
             switch(error)
             {
                 case SerialErrorCodes.FailedToFindDevice:
-                    return "Unable to find device on port {0}";
+                    return Resources.UnableToFindDevice;
                 case SerialErrorCodes.FailedToGetDeviceState:
-                    return "Unable to read the device comm state for the device on port {0}";
+                    return Resources.UnableToGetDeviceState;
                 case SerialErrorCodes.FailedToSetDeviceState:
-                    return "Unable to update the device comm state on port {0}";
+                    return Resources.UnableToSetDeviceState;
                 case SerialErrorCodes.FailedToSetTimeout:
-                    return "Unable to set the timeout for the device on port {0}";
+                    return Resources.UnableToSetTimeout;
                 case SerialErrorCodes.FailedToWriteBuffer:
-                    return "Unable to write to device on port {0}";
+                    return Resources.UnableToWriteDeviceBuffer;
                 case SerialErrorCodes.FailedToReadBuffer:
-                    return "Unable to read from the device on port {0}";
+                    return Resources.UnableToReadDeviceBuffer;
                 default:
-                    return "Cannot identify error";
+                    return Resources.UnknownError;
             }
         }
 

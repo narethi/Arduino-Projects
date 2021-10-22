@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Arduino.Shared\Arduino.Shared.csproj" />
     <ProjectReference Include="..\EpaperUI\EpaperUI.csproj" />
   </ItemGroup>
 
