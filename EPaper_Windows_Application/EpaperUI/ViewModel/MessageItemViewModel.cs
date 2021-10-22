@@ -1,5 +1,6 @@
 ﻿using Arduino.Shared.Enums;
 using EpaperUI.Model;
+using EpaperUI.Properties;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
@@ -33,13 +34,13 @@ namespace EpaperUI.ViewModel
                 switch (_messageData.MessageType)
                 {
                     case MessageTypeCode.Info:
-                        return "INFO";
+                        return Resources.MessageInfoLabel;
                     case MessageTypeCode.Warning:
-                        return "WARNING";
+                        return Resources.MessageWarningLabel;
                     case MessageTypeCode.Error:
-                        return "ERROR";
+                        return Resources.MessageErrorLabel;
                 }
-                return "Unknown";
+                return Resources.MessageUnknownLabel;
             }
         }
 
