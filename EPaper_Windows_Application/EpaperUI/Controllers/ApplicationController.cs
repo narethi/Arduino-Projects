@@ -1,4 +1,5 @@
-﻿using EpaperUI.Controllers;
+﻿using Arduino.Shared.Enums;
+using EpaperUI.Controllers;
 using EpaperUI.EventTypes;
 using EpaperUI.Model;
 using System;
@@ -40,7 +41,7 @@ namespace EpaperUI
             ArduinoController.RunMonitor();
         }
 
-        public void SetMode(string mode)
+        public void SetMode(DisplayMode mode)
         {
             if(ArduinoController.ArduinoControlInitialized == false)
             {

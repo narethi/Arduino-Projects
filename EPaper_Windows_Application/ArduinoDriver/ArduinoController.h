@@ -1,6 +1,7 @@
 #pragma once
 
 using namespace System;
+using namespace Arduino::Shared::Enums;
 
 namespace Arduino
 {
@@ -9,7 +10,7 @@ namespace Arduino
 	public:
 		Controller();
 		~Controller();
-		void SetMode(System::String^ selectedMode);
+		void SetMode(DisplayMode ^ selectedMode);
 		void CheckDeviceState();
 	};
 }

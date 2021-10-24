@@ -1,0 +1,2 @@
+﻿# Read Me
+This folder is used to manage the views that belong to this application, each control should be made to perform a single responsibility if a responsibility is complex then each part of the responsibility should be delegated to subcontrols. Each control type should be able to be extended to perform all functions related to the responsibility but should be further separated into sub controls as the scope of each control's responsibilies increase.'

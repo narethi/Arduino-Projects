@@ -16,6 +16,7 @@
             <ComboBox Grid.Row="0" Margin="0,5,0,0" 
                       SelectedIndex="{Binding Path=SelectedMode, Mode=TwoWay}" 
                       ItemsSource="{Binding ModeString}" HorizontalContentAlignment="Center"/>
+            <local:ModePropertyPanel DeviceMode="{Binding RelativeSource={RelativeSource AncestorType=local:EPaperControl}, Path=DataContext.DeviceMode}" SetMode="ModePropertyPanel_SetMode"/>
         </StackPanel>
     </Grid>
 </UserControl>

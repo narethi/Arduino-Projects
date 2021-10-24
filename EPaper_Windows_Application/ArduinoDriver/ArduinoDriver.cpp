@@ -27,7 +27,7 @@ bool ArduinoDriver::Initialize()
 	ArduinoHandle = CreateFile(L"COM8", GENERIC_READ | GENERIC_WRITE, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	if (ArduinoHandle == INVALID_HANDLE_VALUE)
 	{
-		throw ArduinoDeviceException(SerialErrorCodes::FailedToFindDevice);
+		throw ArduinoDeviceException(SerialErrorCode::FailedToFindDevice);
 	}
 
 	DCB dcbArduinoSerialParams = { 0 };
@@ -35,7 +35,7 @@ bool ArduinoDriver::Initialize()
 	dcbArduinoSerialParams.DCBlength = sizeof(dcbArduinoSerialParams);
 	if (!GetCommState(ArduinoHandle, &dcbArduinoSerialParams))
 	{
-		throw ArduinoDeviceException(SerialErrorCodes::FailedToGetDeviceState);
+		throw ArduinoDeviceException(SerialErrorCode::FailedToGetDeviceState);
 	}
 
 	dcbArduinoSerialParams.BaudRate = CBR_9600;
@@ -45,7 +45,7 @@ bool ArduinoDriver::Initialize()
 
 	if (!SetCommState(ArduinoHandle, &dcbArduinoSerialParams))
 	{
-		throw ArduinoDeviceException(SerialErrorCodes::FailedToSetDeviceState);
+		throw ArduinoDeviceException(SerialErrorCode::FailedToSetDeviceState);
 	}
 
 	COMMTIMEOUTS timeouts = { 0 };
@@ -57,7 +57,7 @@ bool ArduinoDriver::Initialize()
 
 	if (!SetCommTimeouts(ArduinoHandle, &timeouts))
 	{
-		throw ArduinoDeviceException(SerialErrorCodes::FailedToSetTimeout);
+		throw ArduinoDeviceException(SerialErrorCode::FailedToSetTimeout);
 	}
 
 	return true;
@@ -67,7 +67,7 @@ void ArduinoDriver::CheckDeviceCommState()
 {
 	if (ArduinoHandle == INVALID_HANDLE_VALUE)
 	{
-		throw ArduinoDeviceException(SerialErrorCodes::FailedToFindDevice);
+		throw ArduinoDeviceException(SerialErrorCode::FailedToFindDevice);
 	}
 
 	DCB dcbArduinoSerialParams = { 0 };
@@ -75,7 +75,7 @@ void ArduinoDriver::CheckDeviceCommState()
 	dcbArduinoSerialParams.DCBlength = sizeof(dcbArduinoSerialParams);
 	if (!GetCommState(ArduinoHandle, &dcbArduinoSerialParams))
 	{
-		throw ArduinoDeviceException(SerialErrorCodes::FailedToGetDeviceState);
+		throw ArduinoDeviceException(SerialErrorCode::FailedToGetDeviceState);
 	}
 }
 
@@ -118,7 +118,7 @@ void ArduinoDriver::WriteToSerialBus(std::string serialData)
 	CheckDeviceCommState();
 	if (!WriteFile(ArduinoHandle, serialData.c_str(), serialData.size(), &dwWriteBuffer, NULL))
 	{
-		throw ArduinoDeviceException(SerialErrorCodes::FailedToWriteBuffer);
+		throw ArduinoDeviceException(SerialErrorCode::FailedToWriteBuffer);
 	}
 }
 
@@ -128,7 +128,7 @@ void ArduinoDriver::ReadFromSerialBus()
 	DWORD dwBytesRead = 0;
 	if (!ReadFile(ArduinoHandle, szBuff, MAX_ARRAY_SIZE, &dwBytesRead, NULL))
 	{
-		throw ArduinoDeviceException(SerialErrorCodes::FailedToReadBuffer);
+		throw ArduinoDeviceException(SerialErrorCode::FailedToReadBuffer);
 	}
 
 	std::wostringstream oss;  // uses wchar_t characters (UNICODE)

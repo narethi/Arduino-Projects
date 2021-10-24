@@ -1,8 +1,10 @@
-﻿namespace EpaperUI
+﻿using Arduino.Shared.Enums;
+
+namespace EpaperUI
 {
     public interface IApplicationController
     {
-        void SetMode(string mode);
+        void SetMode(DisplayMode mode);
         void EstablishArduinoConnection();
     }
 }

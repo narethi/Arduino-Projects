@@ -3,17 +3,17 @@
 #include "SerialErrorCodes.h"
 
 using namespace System;
-using namespace Arduino::Shared;
+using namespace Arduino;
 
 namespace ArduinoExceptions
 {
 	public ref class DeviceException : Exception
 	{
 	private:
-		Enums::SerialErrorCodes^ _error;
+		Shared::Enums::SerialErrorCodes^ _error;
 	public:
-		DeviceException(SerialErrorCodes error);
-		DeviceException(Enums::SerialErrorCodes^ error);
-		Enums::SerialErrorCodes^ ReadError();
+		DeviceException(SerialErrorCode error);
+		DeviceException(Shared::Enums::SerialErrorCodes^ error);
+		Shared::Enums::SerialErrorCodes^ ReadError();
 	};
 }

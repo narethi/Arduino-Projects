@@ -2,12 +2,12 @@
 #include "ArduinoDeviceException.h"
 
 
-ArduinoDeviceException::ArduinoDeviceException(SerialErrorCodes error)
+ArduinoDeviceException::ArduinoDeviceException(SerialErrorCode error)
 {
 	_error = error;
 }
 
-SerialErrorCodes ArduinoDeviceException::ReadError()
+SerialErrorCode ArduinoDeviceException::ReadError()
 {
 	return _error;
 }

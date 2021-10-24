@@ -6,28 +6,28 @@ using namespace ArduinoExceptions;
 using namespace Arduino::Shared;
 
 
-Enums::SerialErrorCodes^ ConvertErrorCodes(SerialErrorCodes code)
+Enums::SerialErrorCodes^ ConvertErrorCodes(SerialErrorCode code)
 {
 	switch (code)
 	{
-	case SerialErrorCodes::FailedToFindDevice:
+	case SerialErrorCode::FailedToFindDevice:
 			return Enums::SerialErrorCodes::FailedToFindDevice;
-		case SerialErrorCodes::FailedToGetDeviceState:
+		case SerialErrorCode::FailedToGetDeviceState:
 			return Enums::SerialErrorCodes::FailedToGetDeviceState;
-		case SerialErrorCodes::FailedToSetDeviceState:
+		case SerialErrorCode::FailedToSetDeviceState:
 			return Enums::SerialErrorCodes::FailedToSetDeviceState;
-		case SerialErrorCodes::FailedToSetTimeout:
+		case SerialErrorCode::FailedToSetTimeout:
 			return Enums::SerialErrorCodes::FailedToSetTimeout;
-		case SerialErrorCodes::FailedToWriteBuffer:
+		case SerialErrorCode::FailedToWriteBuffer:
 			return Enums::SerialErrorCodes::FailedToWriteBuffer;
-		case SerialErrorCodes::FailedToReadBuffer:
+		case SerialErrorCode::FailedToReadBuffer:
 			return Enums::SerialErrorCodes::FailedToReadBuffer;
 		default:
 			return Enums::SerialErrorCodes::UnknownError;
 	}
 }
 
-DeviceException::DeviceException(SerialErrorCodes error)
+DeviceException::DeviceException(SerialErrorCode error)
 {
 	_error = ConvertErrorCodes(error);
 }

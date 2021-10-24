@@ -1,7 +1,5 @@
 ﻿using EpaperUI.Model;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace EpaperUI.ViewModel
 {

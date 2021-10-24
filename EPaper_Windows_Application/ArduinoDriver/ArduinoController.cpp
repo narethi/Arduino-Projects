@@ -7,6 +7,7 @@
 
 using namespace Arduino;
 using namespace ArduinoExceptions;
+using namespace Arduino::Shared::Enums;
 
 ArduinoDriver * arduino;
 
@@ -39,23 +40,35 @@ void Controller::CheckDeviceState()
 	}
 }
 
-void Controller::SetMode(System::String^ selectedMode)
+void Controller::SetMode(DisplayMode ^ selectedMode)
 {
 	try
 	{
 		if (arduino != nullptr)
 		{
-			if (selectedMode == "Text")
+			//Passing the enum in from the C# layer to the managed CLI layer
+			//Converts the enum to an "<error-type>" and needs to be converted
+			//back to the correct enum type
+			auto adjustedMode = static_cast<DisplayMode>(selectedMode);
+			if (adjustedMode == DisplayMode::Text)
 			{
 				arduino->SetDisplayToText("This is from my managed layer");
 			}
-			else if (selectedMode == "Blocks")
+			else if (adjustedMode == DisplayMode::Blocks)
 			{
 				arduino->SetDisplayToBlockMode();
 			}
-			else if (selectedMode == "Static")
+			else if (adjustedMode == DisplayMode::Static)
 			{
 				arduino->SetDisplayToStaticMode();
+			}
+			else if (adjustedMode == DisplayMode::Checker)
+			{
+				arduino->SetDisplayToText("Checker Mode");
+			}
+			else if (adjustedMode == DisplayMode::Sleep)
+			{
+				arduino->SetDisplayToText("Sleep Mode");
 			}
 		}
 	}

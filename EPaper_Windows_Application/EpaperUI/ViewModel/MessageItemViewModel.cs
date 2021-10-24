@@ -1,8 +1,6 @@
 ﻿using Arduino.Shared.Enums;
 using EpaperUI.Model;
 using EpaperUI.Properties;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 
 namespace EpaperUI.ViewModel

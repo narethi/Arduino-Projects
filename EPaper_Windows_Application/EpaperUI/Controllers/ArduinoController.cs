@@ -60,7 +60,7 @@ namespace EpaperUI
             }
         }
 
-        public void SetMode(string mode)
+        public void SetMode(DisplayMode mode)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace EpaperUI
 
         #if DEBUG
         private string _caller = Environment.StackTrace;
-#endif
+        #endif
 
         public void Dispose()
         {

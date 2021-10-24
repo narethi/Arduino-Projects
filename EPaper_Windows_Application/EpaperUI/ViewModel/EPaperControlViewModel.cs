@@ -1,8 +1,6 @@
 ﻿
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using EpaperUI.EventTypes;
+using Arduino.Shared.Enums;
 
 namespace EpaperUI.ViewModel
 {
@@ -12,13 +10,13 @@ namespace EpaperUI.ViewModel
         {
         }
 
-        public event SetModeHandler HandleSetMode;
-
         private List<string> _modeString = new List<string>()
         {
             "Text",
             "Blocks",
-            "Static"
+            "Static",
+            "Checkers",
+            "Sleep"
         };
 
         public List<string> ModeString 
@@ -30,6 +28,17 @@ namespace EpaperUI.ViewModel
             }
         }
 
+        private DisplayMode _deviceMode = DisplayMode.Unknown;
+        public DisplayMode DeviceMode
+        {
+            get => _deviceMode;
+            set
+            {
+                _deviceMode = value;
+                OnPropertyChanged();
+            }
+        }
+
         private int _selectedMode = 0;
         public int SelectedMode
         {
@@ -37,7 +46,28 @@ namespace EpaperUI.ViewModel
             set
             {
                 _selectedMode = value;
-                HandleSetMode?.Invoke(_modeString[_selectedMode]);
+                var modeString = _modeString[_selectedMode];
+                switch(modeString)
+                {
+                    case "Text":
+                        DeviceMode = DisplayMode.Text;
+                        break;
+                    case "Blocks":
+                        DeviceMode = DisplayMode.Blocks;
+                        break;
+                    case "Static":
+                        DeviceMode = DisplayMode.Static;
+                        break;
+                    case "Checkers":
+                        DeviceMode = DisplayMode.Checker;
+                        break;
+                    case "Sleep":
+                        DeviceMode = DisplayMode.Sleep;
+                        break;
+                    default:
+                        DeviceMode = DisplayMode.Unknown;
+                        break;
+                }
                 OnPropertyChanged();
             }
         }

@@ -6,10 +6,10 @@
 class ArduinoDeviceException : std::exception
 {
 private:
-	SerialErrorCodes _error = SerialErrorCodes::UnknownError;
+	SerialErrorCode _error = SerialErrorCode::UnknownError;
 public:
-	ArduinoDeviceException(SerialErrorCodes error);
-	SerialErrorCodes ReadError();
+	ArduinoDeviceException(SerialErrorCode error);
+	SerialErrorCode ReadError();
 };
 
 
