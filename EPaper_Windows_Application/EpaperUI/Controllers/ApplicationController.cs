@@ -41,7 +41,7 @@ namespace EpaperUI
             ArduinoController.RunMonitor();
         }
 
-        public void SetMode(DisplayMode mode)
+        public void SetMode(DisplayMode mode, params object[] args)
         {
             if(ArduinoController.ArduinoControlInitialized == false)
             {
@@ -51,7 +51,7 @@ namespace EpaperUI
 
             try
             {
-                ArduinoController.SetMode(mode);
+                ArduinoController.SetMode(mode, args);
                 MessageController.SetInfoMessage("Successfully set mode to {0} for Arduino on port {1}", mode, "COM8");
             }
             catch (Exception e)

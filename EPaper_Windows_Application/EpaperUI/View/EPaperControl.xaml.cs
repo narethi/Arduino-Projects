@@ -32,11 +32,12 @@ namespace EpaperUI.View
         }
 
         // This method raises the Tap event
-        void RaiseSetModeEvent(DisplayMode mode)
+        void RaiseSetModeEvent(DisplayMode mode, params object[] args)
         {
             SetModeRoutedEventArgs newEventArgs = new SetModeRoutedEventArgs(SetModeEvent)
             {
-                Mode = mode
+                Mode = mode,
+                Parameters = args
             };
             RaiseEvent(newEventArgs);
         }
@@ -47,7 +48,7 @@ namespace EpaperUI.View
         {
             if(e is SetModeRoutedEventArgs eventArgs)
             {
-                RaiseSetModeEvent(eventArgs.Mode);
+                RaiseSetModeEvent(eventArgs.Mode, eventArgs.Parameters);
             }
         }
     }

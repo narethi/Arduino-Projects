@@ -7,15 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="26"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <epapercontrols:SetStaticModeControl Visibility="{Binding StaticModeControlVisibility}" SetMode="ModeControl_SetMode"/>
-            <epapercontrols:SetBlocksModeControl Visibility="{Binding BlocksModeControlVisibility}"  SetMode="ModeControl_SetMode"/>
-            <epapercontrols:SetTextModeControl Visibility="{Binding TextModeControlVisibility}"  SetMode="ModeControl_SetMode"/>
-            <epapercontrols:SetCheckerModeControl Visibility="{Binding CheckerModeControlVisibility}"  SetMode="ModeControl_SetMode"/>
+        <StackPanel>
+            <epapercontrols:SetStaticModeControl  Visibility="{Binding StaticModeControlVisibility}" SetMode="ModeControl_SetMode"/>
+            <epapercontrols:SetBlocksModeControl  Visibility="{Binding RelativeSource={RelativeSource AncestorType=local:ModePropertyPanel}, Path=DataContext.BlocksModeControlVisibility}"  SetMode="ModeControl_SetMode"/>
+            <epapercontrols:SetTextModeControl    Visibility="{Binding RelativeSource={RelativeSource AncestorType=local:ModePropertyPanel}, Path=DataContext.TextModeControlVisibility}"  SetMode="ModeControl_SetMode"/>
+            <epapercontrols:SetCheckerModeControl Visibility="{Binding RelativeSource={RelativeSource AncestorType=local:ModePropertyPanel}, Path=DataContext.CheckerModeControlVisibility}"  SetMode="ModeControl_SetMode"/>
         </StackPanel>
     </Grid>
 </UserControl>

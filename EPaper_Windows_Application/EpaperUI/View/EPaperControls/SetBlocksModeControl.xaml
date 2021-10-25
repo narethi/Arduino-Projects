@@ -11,7 +11,7 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBlock Text="Testing the Set Block Mode" Grid.Row="0"/>
-        <Button Content="SetMode" Click="Button_Click" Grid.Row="1"></Button>
+        <CheckBox Margin="10,10,10,10" Content="Vertical Orientation" Grid.Row="0" IsChecked="{Binding SetBlocksVertically}"/>
+        <Button Margin="10,10,10,10" Content="SetMode" Click="Button_Click" Grid.Row="1"></Button>
     </Grid>
 </local:PropertyPanelControl>

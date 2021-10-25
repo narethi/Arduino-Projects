@@ -29,7 +29,7 @@ namespace EpaperUI
         {
             if(e is SetModeRoutedEventArgs setModeArgs)
             {
-                ApplicationController.SetMode(setModeArgs.Mode);
+                ApplicationController.SetMode(setModeArgs.Mode, setModeArgs.Parameters);
             }
         }
 

@@ -10,7 +10,7 @@ namespace Arduino
 	public:
 		Controller();
 		~Controller();
-		void SetMode(DisplayMode ^ selectedMode);
+		void SetMode(DisplayMode ^ selectedMode, ...array<Object^> ^args);
 		void CheckDeviceState();
 	};
 }

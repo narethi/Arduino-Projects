@@ -4,7 +4,7 @@ namespace EpaperUI
 {
     public interface IApplicationController
     {
-        void SetMode(DisplayMode mode);
+        void SetMode(DisplayMode mode, params object[] args);
         void EstablishArduinoConnection();
     }
 }

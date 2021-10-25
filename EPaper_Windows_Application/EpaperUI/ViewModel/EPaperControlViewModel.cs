@@ -39,7 +39,7 @@ namespace EpaperUI.ViewModel
             }
         }
 
-        private int _selectedMode = 0;
+        private int _selectedMode = 4;
         public int SelectedMode
         {
             get => _selectedMode;

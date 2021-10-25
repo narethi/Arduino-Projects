@@ -11,7 +11,18 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBlock Text="Testing the Set Static Mode" Grid.Row="0"/>
-        <Button Content="SetMode" Click="Button_Click" Grid.Row="1" />
+        <StackPanel Margin="10,10,10,0">
+            <RadioButton Content="1x1" IsChecked="True"/>
+            <RadioButton Content="2x2" />
+            <RadioButton Content="4x4" />
+            <RadioButton Content="5x5" />
+            <RadioButton Content="8x8" />
+            <RadioButton Content="10x10" />
+            <RadioButton Content="20x20" />
+            <RadioButton Content="25x25" />
+            <RadioButton Content="50x50" />
+            <RadioButton Content="100x100" />
+        </StackPanel>
+        <Button Margin="10,10,10,10" Content="SetMode" Click="Button_Click" Grid.Row="1" />
     </Grid>
 </local:PropertyPanelControl>

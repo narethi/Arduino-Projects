@@ -60,11 +60,11 @@ namespace EpaperUI
             }
         }
 
-        public void SetMode(DisplayMode mode)
+        public void SetMode(DisplayMode mode, params object[] args)
         {
             try
             {
-                _arduinoController.SetMode(mode);
+                _arduinoController.SetMode(mode, args);
             }
             catch (DeviceException e)
             {

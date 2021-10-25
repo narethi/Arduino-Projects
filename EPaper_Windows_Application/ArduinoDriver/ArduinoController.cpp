@@ -11,6 +11,20 @@ using namespace Arduino::Shared::Enums;
 
 ArduinoDriver * arduino;
 
+/// <summary>
+/// This is lifted from the microsoft documentation for how to marshal strings (I can never remember how to make ANSI strings)
+/// https://docs.microsoft.com/en-us/cpp/dotnet/how-to-convert-system-string-to-standard-string?view=msvc-160
+/// </summary>
+/// <param name="s"></param>
+/// <param name="os"></param>
+void MarshalString(String^ s, std::string& os) {
+	using namespace Runtime::InteropServices;
+	const char* chars =
+		(const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+	os = chars;
+	Marshal::FreeHGlobal(IntPtr((void*)chars));
+}
+
 Controller::Controller()
 {
 	try
@@ -40,7 +54,7 @@ void Controller::CheckDeviceState()
 	}
 }
 
-void Controller::SetMode(DisplayMode ^ selectedMode)
+void Controller::SetMode(DisplayMode ^ selectedMode, ...array<Object^>^ args)
 {
 	try
 	{
@@ -52,7 +66,12 @@ void Controller::SetMode(DisplayMode ^ selectedMode)
 			auto adjustedMode = static_cast<DisplayMode>(selectedMode);
 			if (adjustedMode == DisplayMode::Text)
 			{
-				arduino->SetDisplayToText("This is from my managed layer");
+				std::string outputData = "";
+				if (args->Length > 0)
+				{
+					MarshalString(static_cast<System::String^>(args[0]), outputData);
+				}
+				arduino->SetDisplayToText(outputData);
 			}
 			else if (adjustedMode == DisplayMode::Blocks)
 			{

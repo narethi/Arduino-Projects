@@ -25,7 +25,8 @@ namespace EpaperUI.View.EPaperControls
         {
             SetModeRoutedEventArgs newEventArgs = new SetModeRoutedEventArgs(SetModeEvent)
             {
-                Mode = mode
+                Mode = mode,
+                Parameters = args
             };
             RaiseEvent(newEventArgs);
         }
