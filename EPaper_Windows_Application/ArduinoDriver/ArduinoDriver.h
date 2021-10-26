@@ -13,9 +13,11 @@ private:
 public:
 	ArduinoDriver();
 	~ArduinoDriver();
-	void SetDisplayToBlockMode();
-	void SetDisplayToStaticMode();
+	void SetDisplayToBlockMode(bool isVertical);
+	void SetDisplayToStaticMode(int blockSize);
+	void SetDisplayToCheckerMode(int blockSize);
 	void SetDisplayToText(std::string text);
+	void SetDisplayToSleepMode();
 	void CheckDeviceCommState();
 };
 

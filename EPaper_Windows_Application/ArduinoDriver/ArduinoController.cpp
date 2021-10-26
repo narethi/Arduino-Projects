@@ -75,19 +75,19 @@ void Controller::SetMode(DisplayMode ^ selectedMode, ...array<Object^>^ args)
 			}
 			else if (adjustedMode == DisplayMode::Blocks)
 			{
-				arduino->SetDisplayToBlockMode();
+				arduino->SetDisplayToBlockMode(static_cast<bool>(args[0]));
 			}
 			else if (adjustedMode == DisplayMode::Static)
 			{
-				arduino->SetDisplayToStaticMode();
+				arduino->SetDisplayToStaticMode(static_cast<int>(args[0]));
 			}
 			else if (adjustedMode == DisplayMode::Checker)
 			{
-				arduino->SetDisplayToText("Checker Mode");
+				arduino->SetDisplayToCheckerMode(static_cast<int>(args[0]));
 			}
 			else if (adjustedMode == DisplayMode::Sleep)
 			{
-				arduino->SetDisplayToText("Sleep Mode");
+				arduino->SetDisplayToSleepMode();
 			}
 		}
 	}

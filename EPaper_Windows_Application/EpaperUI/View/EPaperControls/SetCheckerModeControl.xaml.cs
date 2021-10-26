@@ -1,4 +1,5 @@
 ﻿using Arduino.Shared.Enums;
+using EpaperUI.ViewModel.EPaperControlViewModels;
 using System.Windows;
 
 namespace EpaperUI.View.EPaperControls
@@ -8,14 +9,16 @@ namespace EpaperUI.View.EPaperControls
     /// </summary>
     public partial class SetCheckerModeControl : PropertyPanelControl
     {
+        private readonly SetRadioModeControlViewModel _viewModel = new();
         public SetCheckerModeControl()
         {
+            DataContext = _viewModel;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            RaiseSetModeEvent(DisplayMode.Checker);
+            RaiseSetModeEvent(DisplayMode.Checker, _viewModel.ModeValue);
         }
     }
 }

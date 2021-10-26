@@ -3,25 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:EpaperUI.View.EPaperControls"
-             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:EpaperUI.View.EPaperControls" xmlns:converters="clr-namespace:EpaperUI.Converters"
+                            mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.Resources>
+            <!-- I tried to add this to the app.xaml as an application resource and tried adding this as a Window resource in MainWindow.xaml but the converter doesn't seem to work when its not local -->
+            <converters:RadioBoolToPixelDimensionsConverter x:Key="radioBoolToPixelDimensionsConverter" />
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <StackPanel Margin="10,10,10,0">
-            <RadioButton Content="1x1" IsChecked="True"/>
-            <RadioButton Content="2x2" />
-            <RadioButton Content="4x4" />
-            <RadioButton Content="5x5" />
-            <RadioButton Content="8x8" />
-            <RadioButton Content="10x10" />
-            <RadioButton Content="20x20" />
-            <RadioButton Content="25x25" />
-            <RadioButton Content="50x50" />
-            <RadioButton Content="100x100" />
+        <StackPanel Margin="10,10,10,0" Grid.Row="0">
+            <Label Content="Pixel Size:"/>
+            <RadioButton Content="1x1" IsChecked="{Binding Path=ModeValue, Converter={StaticResource radioBoolToPixelDimensionsConverter}, ConverterParameter=1}"/>
+            <RadioButton Content="2x2" IsChecked="{Binding Path=ModeValue, Converter={StaticResource radioBoolToPixelDimensionsConverter}, ConverterParameter=2}"/>
+            <RadioButton Content="4x4" IsChecked="{Binding Path=ModeValue, Converter={StaticResource radioBoolToPixelDimensionsConverter}, ConverterParameter=4}"/>
+            <RadioButton Content="5x5" IsChecked="{Binding Path=ModeValue, Converter={StaticResource radioBoolToPixelDimensionsConverter}, ConverterParameter=5}"/>
+            <RadioButton Content="8x8" IsChecked="{Binding Path=ModeValue, Converter={StaticResource radioBoolToPixelDimensionsConverter}, ConverterParameter=8}"/>
+            <RadioButton Content="10x10" IsChecked="{Binding Path=ModeValue, Converter={StaticResource radioBoolToPixelDimensionsConverter}, ConverterParameter=10}"/>
+            <RadioButton Content="20x20" IsChecked="{Binding Path=ModeValue, Converter={StaticResource radioBoolToPixelDimensionsConverter}, ConverterParameter=20}"/>
+            <RadioButton Content="25x25" IsChecked="{Binding Path=ModeValue, Converter={StaticResource radioBoolToPixelDimensionsConverter}, ConverterParameter=25}"/>
+            <RadioButton Content="50x50" IsChecked="{Binding Path=ModeValue, Converter={StaticResource radioBoolToPixelDimensionsConverter}, ConverterParameter=50}"/>
+            <RadioButton Content="100x100" IsChecked="{Binding Path=ModeValue, Converter={StaticResource radioBoolToPixelDimensionsConverter}, ConverterParameter=100}"/>
         </StackPanel>
         <Button Margin="10,10,10,10" Content="SetMode" Click="Button_Click" Grid.Row="1" />
     </Grid>

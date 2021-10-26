@@ -33,6 +33,10 @@ namespace EpaperUI.Controllers
                 var baseMessage = ConstructMessageStringFromSerialError((SerialErrorCodes)deviceException.ReadError());
                 await SetMessage(MessageTypeCode.Error, baseMessage, "COM8");
             }
+            else
+            {
+                await SetMessage(MessageTypeCode.Error, exception.Message);
+            }
         }
 
         private string ConstructMessageStringFromSerialError(SerialErrorCodes error)

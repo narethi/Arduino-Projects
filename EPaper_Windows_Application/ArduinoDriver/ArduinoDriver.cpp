@@ -79,14 +79,27 @@ void ArduinoDriver::CheckDeviceCommState()
 	}
 }
 
-void ArduinoDriver::SetDisplayToBlockMode()
+void ArduinoDriver::SetDisplayToBlockMode(bool isVertical)
 {
-	RunCommand(ArduinoSerialCommand::RunBlocks, 0);
+	auto serializedIsVertical = static_cast<char*>(static_cast<void*>(&isVertical));
+	RunCommand(ArduinoSerialCommand::RunBlocks, 1, serializedIsVertical);
 }
 
-void ArduinoDriver::SetDisplayToStaticMode()
+void ArduinoDriver::SetDisplayToStaticMode(int blockSize)
 {
-	RunCommand(ArduinoSerialCommand::RunStatic, 0);
+	auto serializedBlockSize = static_cast<char*>(static_cast<void*>(&blockSize));
+	RunCommand(ArduinoSerialCommand::RunStatic, 1, serializedBlockSize);
+}
+
+void ArduinoDriver::SetDisplayToCheckerMode(int blockSize)
+{
+	auto serializedBlockSize = static_cast<char*>(static_cast<void*>(&blockSize));
+	RunCommand(ArduinoSerialCommand::RunChecker, 1, serializedBlockSize);
+}
+
+void ArduinoDriver::SetDisplayToSleepMode()
+{
+	RunCommand(ArduinoSerialCommand::RunSleep, 0);
 }
 
 void ArduinoDriver::SetDisplayToText(std::string text)
