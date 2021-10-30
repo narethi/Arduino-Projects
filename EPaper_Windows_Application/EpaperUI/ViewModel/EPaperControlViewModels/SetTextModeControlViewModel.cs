@@ -2,7 +2,7 @@
 {
     public class SetTextModeControlViewModel : BaseViewModel
     {
-        private string _textToWrite;
+        private string _textToWrite = string.Empty;
 
         public string TextToWrite
         {

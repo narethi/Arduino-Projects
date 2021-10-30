@@ -3,22 +3,36 @@
 
 #include "Frame.h"
 #include <Fonts/FreeMonoBold9pt7b.h>
+#include "DisplayMode.h"
 
 String displayText = "Rendering Strings";
 int _CurrentX = 0;
 int _CurrentY = 0;
 int _CurrentColor = 0;
 bool _TextWriteReady = false;
+bool verticalBlockMode = false;
+int staticPixelSize = 1;
+bool checkerStartWhite = false;
+//This is out here as for some reason when I make this as a local inside the for loops
+//In the draw checkers it crashes the application and prevents it from starting up
+bool startLineWhite = false;
 
 Frame::Frame()
 {
-	_Display.init();
-	_Display.setPartialWindow(0, 0, _Display.width(), _Display.height());
-  	_Display.setFont(&FreeMonoBold9pt7b);
-	_Display.setTextColor(GxEPD_BLACK);
-	_Display.firstPage();
-	_Display.fillScreen(GxEPD_WHITE);
-	_Display.nextPage();
+  InitDisplay();
+}
+
+void Frame::InitDisplay()
+{
+   delete _Display;
+   _Display = new GxEPD2_BW<GxEPD2_154_D67, 200>(GxEPD2_154_D67(/*CS=*/ SS, /*DC=*/ 8, /*RST=*/ 9, /*BUSY=*/ 7)); // GDEH0154D67
+   _Display->init();
+   _Display->setPartialWindow(0, 0, _Display->width(), _Display->height());
+   _Display->setFont(&FreeMonoBold9pt7b);
+   _Display->setTextColor(GxEPD_BLACK);
+   _Display->firstPage();
+   _Display->fillScreen(GxEPD_WHITE);
+   _Display->nextPage();
 }
 
 void Frame::StepBuffer()
@@ -55,10 +69,17 @@ void Frame::DrawBlockBuffer()
 	{
 		for (auto y = _CurrentY; y < _CurrentY + 10; y++)
 		{
-			_Display.drawPixel(x, y, _CurrentColor);
+      if(verticalBlockMode)
+      {
+        _Display->drawPixel(y, x, _CurrentColor);
+      }
+      else
+      {
+        _Display->drawPixel(x, y, _CurrentColor);
+      }
 		}
 	}
-	_Display.nextPage();
+	_Display->nextPage();
 }
 
 void Frame::Reset()
@@ -70,46 +91,86 @@ void Frame::Reset()
 
 void Frame::Flash()
 {
-  _Display.fillScreen(GxEPD_BLACK);
-  _Display.nextPage();
-  _Display.fillScreen(GxEPD_WHITE);
-  _Display.nextPage();
+  InitDisplay();
 }
 
 void Frame::ReadSerialCommand(String text)
 {
 	Flash();
-	if(text[0] == 1)
+	if(static_cast<DisplayMode>(text[0]) == DisplayMode::BlockMode)
 	{
 		DrawText("Blocks Mode");
 		_DisplayMode = DisplayMode::BlockMode;
+    verticalBlockMode = static_cast<bool>(text[1]);
 		Reset();
 	}
-	if(text[0] == 2)
+	else if(static_cast<DisplayMode>(text[0]) == DisplayMode::TextMode)
 	{
 		DrawText("Text Mode");
 		_TextWriteReady = true;
 		displayText = text.substring(1);
 		_DisplayMode = DisplayMode::TextMode;
 	}
-	if(text[0] == 3)
+	else if(static_cast<DisplayMode>(text[0]) == DisplayMode::StaticMode)
 	{
 		DrawText("Static Mode");
+    staticPixelSize = text[1];// *static_cast<int*>(static_cast<void*>(&test));
 		_DisplayMode = DisplayMode::StaticMode;
 	}
+  else if(static_cast<DisplayMode>(text[0]) == DisplayMode::CheckerMode)
+  {
+    DrawText("Checker Mode");
+    staticPixelSize = text[1];// *static_cast<int*>(static_cast<void*>(&test));
+    _DisplayMode = DisplayMode::CheckerMode;
+  }
 }
 
 void Frame::DrawStaticField()
 {
-	_Display.fillScreen(GxEPD_WHITE);
-	for(auto x = 0; x < WIDTH; x++)
+	_Display->fillScreen(GxEPD_WHITE);
+	for(auto x = 0; x < WIDTH; x+= staticPixelSize)
 	{
-		for(auto y = 0; y < HEIGHT; y++)
+		for(auto y = 0; y < HEIGHT; y+= staticPixelSize)
 		{
-			_Display.drawPixel(x,y, random(100)%2);
+      auto color = random(100)%2;
+      for(auto xPixelSize = 0; xPixelSize <= staticPixelSize - 1; xPixelSize++)
+      {
+        for(auto yPixelSize = 0; yPixelSize <= staticPixelSize - 1; yPixelSize++)
+        {
+          _Display->drawPixel(x+xPixelSize,y+yPixelSize, color);
+        }
+      }
 		}
 	}
-	_Display.nextPage();
+	_Display->nextPage();
+}
+
+void Frame::DrawCheckerField()
+{
+  _Display->fillScreen(GxEPD_WHITE);
+  auto drawWhite = checkerStartWhite;
+  startLineWhite = drawWhite;
+  for(auto x = 0; x < WIDTH; x+= staticPixelSize)
+  {
+    for(auto y = 0; y < HEIGHT; y+= staticPixelSize)
+    {
+      for(auto xPixelSize = 0; xPixelSize <= staticPixelSize - 1; xPixelSize++)
+      {
+        for(auto yPixelSize = 0; yPixelSize <= staticPixelSize - 1; yPixelSize++)
+        {
+            _Display->drawPixel(x+xPixelSize, y+yPixelSize, startLineWhite ? 1 : 0);
+        }
+      }
+      
+      startLineWhite = !startLineWhite;
+    }
+    
+    drawWhite = !drawWhite;
+    startLineWhite = drawWhite;
+  }
+  
+  checkerStartWhite = !checkerStartWhite;
+  _Display->nextPage();
 }
 
 void Frame::Render()
@@ -126,6 +187,9 @@ void Frame::Render()
 		case DisplayMode::StaticMode:
 		 	DrawStaticField();
 			break;
+    case DisplayMode::CheckerMode:
+      DrawCheckerField();
+      break;
 		default:
 			break;
 	}
@@ -134,14 +198,14 @@ void Frame::Render()
 void Frame::DrawText(String text)
 {
 		int16_t tbx, tby; uint16_t tbw, tbh;
-		_Display.getTextBounds(text, 0, 0, &tbx, &tby, &tbw, &tbh);
+		_Display->getTextBounds(text, 0, 0, &tbx, &tby, &tbw, &tbh);
 		// center the bounding box by transposition of the origin:
-		uint16_t x = ((_Display.width() - tbw) / 2) - tbx;
-		uint16_t y = ((_Display.height() - tbh) / 2) - tby;
-		_Display.fillScreen(GxEPD_WHITE);
-		_Display.setCursor(x, y);
-		_Display.print(text);
-		_Display.nextPage();
+		uint16_t x = ((_Display->width() - tbw) / 2) - tbx;
+		uint16_t y = ((_Display->height() - tbh) / 2) - tby;
+		_Display->fillScreen(GxEPD_WHITE);
+		_Display->setCursor(x, y);
+		_Display->print(text);
+		_Display->nextPage();
 }
 
 #endif

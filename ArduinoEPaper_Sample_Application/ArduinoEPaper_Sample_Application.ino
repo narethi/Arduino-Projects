@@ -48,30 +48,6 @@ void setup()
     }
     test.Render();
   }
-  /*display.init();
-  // comment out next line to have no or minimal Adafruit_GFX code
-  display.setTextColor(GxEPD_BLACK);
-  display.firstPage();
-  do
-  {
-    display.fillScreen(GxEPD_WHITE);
-    for(int i = 0; i <  50;  i++)
-    {
-      for(int j = 50; j <  100; j++)
-      {
-        display.drawPixel(i,j,0);
-      }
-    }
-
-    display.drawPixel(10,75,1);
-    display.drawPixel(10,76,50);
-    display.drawPixel(10,77,100);
-    display.drawPixel(10,78,150);
-    
-    // comment out next line to have no or minimal Adafruit_GFX code
-    display.print("Hello World!");
-  }
-  while (display.nextPage());*/
 }
 
 void loop() 

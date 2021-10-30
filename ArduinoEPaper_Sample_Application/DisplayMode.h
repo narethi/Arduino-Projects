@@ -1,8 +1,10 @@
 #pragma once
 
-enum DisplayMode
+enum class DisplayMode
 {
-    BlockMode,
-    TextMode,
-    StaticMode
+    BlockMode = 1,
+    TextMode = 2,
+    StaticMode = 3,
+    CheckerMode = 4,
+    SleepMode = 5
 };
