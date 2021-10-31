@@ -9,7 +9,6 @@ String displayText = "Rendering Strings";
 int _CurrentX = 0;
 int _CurrentY = 0;
 int _CurrentColor = 0;
-bool _TextWriteReady = false;
 bool verticalBlockMode = false;
 int staticPixelSize = 1;
 bool checkerStartWhite = false;
@@ -96,32 +95,32 @@ void Frame::Flash()
 
 void Frame::ReadSerialCommand(String text)
 {
-	Flash();
-	if(static_cast<DisplayMode>(text[0]) == DisplayMode::BlockMode)
-	{
-		DrawText("Blocks Mode");
-		_DisplayMode = DisplayMode::BlockMode;
-    verticalBlockMode = static_cast<bool>(text[1]);
-		Reset();
-	}
-	else if(static_cast<DisplayMode>(text[0]) == DisplayMode::TextMode)
-	{
-		DrawText("Text Mode");
-		_TextWriteReady = true;
-		displayText = text.substring(1);
-		_DisplayMode = DisplayMode::TextMode;
-	}
-	else if(static_cast<DisplayMode>(text[0]) == DisplayMode::StaticMode)
-	{
-		DrawText("Static Mode");
-    staticPixelSize = text[1];// *static_cast<int*>(static_cast<void*>(&test));
-		_DisplayMode = DisplayMode::StaticMode;
-	}
-  else if(static_cast<DisplayMode>(text[0]) == DisplayMode::CheckerMode)
+  _DisplayMode = static_cast<DisplayMode>(text[0]);
+  if(_DisplayMode == DisplayMode::SleepMode)
   {
-    DrawText("Checker Mode");
-    staticPixelSize = text[1];// *static_cast<int*>(static_cast<void*>(&test));
-    _DisplayMode = DisplayMode::CheckerMode;
+    return;
+  }
+  
+	Flash();
+  switch(_DisplayMode)
+  {
+    case DisplayMode::BlockMode:
+      DrawText("Blocks Mode");
+      verticalBlockMode = static_cast<bool>(text[1]);
+      Reset();
+      break;
+    case DisplayMode::TextMode:
+      DrawText("Text Mode");
+      displayText = text.substring(1);
+      break;
+   case DisplayMode::StaticMode:
+      DrawText("Static Mode");
+      staticPixelSize = text[1];
+      break;
+   case DisplayMode::CheckerMode:
+      DrawText("Checker Mode");
+      staticPixelSize = text[1];
+      break;
   }
 }
 
@@ -183,12 +182,16 @@ void Frame::Render()
 			break;
 		case DisplayMode::TextMode:
 			DrawText(displayText);
+      _DisplayMode = DisplayMode::SleepMode;
 			break;
 		case DisplayMode::StaticMode:
 		 	DrawStaticField();
 			break;
     case DisplayMode::CheckerMode:
       DrawCheckerField();
+      break;
+    case DisplayMode::SleepMode:
+      delay(100);
       break;
 		default:
 			break;

@@ -28,7 +28,7 @@ namespace EpaperUI.ViewModel
             }
         }
 
-        private DisplayMode _deviceMode = DisplayMode.Unknown;
+        private DisplayMode _deviceMode = DisplayMode.Sleep;
         public DisplayMode DeviceMode
         {
             get => _deviceMode;

@@ -33,8 +33,7 @@
 void setup()
 {
   Serial.begin(9600);
-  Frame test;
-  //test = new Frame();
+  Frame displayFrame;
   while(true)
   {
     if(Serial.available() > 0)
@@ -44,9 +43,9 @@ void setup()
       {
         serialData += String((char)Serial.read()); 
       }
-      test.ReadSerialCommand(serialData);
+      displayFrame.ReadSerialCommand(serialData);
     }
-    test.Render();
+    displayFrame.Render();
   }
 }
 
