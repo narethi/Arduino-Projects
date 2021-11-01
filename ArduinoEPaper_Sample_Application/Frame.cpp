@@ -95,12 +95,26 @@ void Frame::Flash()
 
 void Frame::ReadSerialCommand(String text)
 {
-  _DisplayMode = static_cast<DisplayMode>(text[0]);
-  if(_DisplayMode == DisplayMode::SleepMode)
+  if(_DisplayMode != DisplayMode::SleepMode)
   {
-    return;
+    _PreviousDisplayMode = _DisplayMode;
   }
   
+  auto displayMode = static_cast<DisplayMode>(text[0]);
+  if(displayMode == DisplayMode::SleepMode)
+  {
+    if(_DisplayMode == DisplayMode::SleepMode)
+    {
+      _DisplayMode = _PreviousDisplayMode;
+    }
+    else
+    {
+      _DisplayMode = displayMode;
+    }
+    return;
+  }
+
+  _DisplayMode = displayMode;
 	Flash();
   switch(_DisplayMode)
   {
@@ -191,7 +205,7 @@ void Frame::Render()
       DrawCheckerField();
       break;
     case DisplayMode::SleepMode:
-      delay(100);
+    delay(100);
       break;
 		default:
 			break;
