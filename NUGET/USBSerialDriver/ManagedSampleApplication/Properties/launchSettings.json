@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ManagedSampleApplication": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

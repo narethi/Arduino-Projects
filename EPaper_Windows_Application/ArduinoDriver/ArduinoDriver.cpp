@@ -71,8 +71,8 @@ void ArduinoDriver::CheckDeviceCommState()
 	}
 
 	DCB dcbArduinoSerialParams = { 0 };
-
 	dcbArduinoSerialParams.DCBlength = sizeof(dcbArduinoSerialParams);
+
 	if (!GetCommState(ArduinoHandle, &dcbArduinoSerialParams))
 	{
 		throw ArduinoDeviceException(SerialErrorCode::FailedToGetDeviceState);
