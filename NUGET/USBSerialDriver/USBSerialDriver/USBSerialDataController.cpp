@@ -7,6 +7,7 @@ using namespace InteropTools;
 
 namespace USBSerialDriver
 {
+	//TODO: Add in the managed exceptions, and have these functions use and propagate the new exceptions
 	USBSerialDataController::USBSerialDataController(System::String^ deviceName)
 	{
 		_driver = new USBDriver(Interop::MarshalString(deviceName).c_str());

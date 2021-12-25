@@ -8,5 +8,6 @@ enum class USBDeviceErrorCode
 	FailedToSetDeviceState = 3,
 	FailedToSetTimeout = 4,
 	FailedToWriteBuffer = 5,
-	FailedToReadBuffer = 6
+	FailedToReadBuffer = 6,
+	FailedToFindPortSettings = 7
 };

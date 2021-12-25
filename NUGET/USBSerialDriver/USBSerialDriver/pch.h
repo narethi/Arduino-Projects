@@ -6,6 +6,13 @@
 
 #ifndef PCH_H
 #define PCH_H
+// add additional preprocessors here
+
+#ifdef DRIVER_EXPORTS
+#define DRIVER_API __declspec(dllexport) 
+#else
+#define DRIVER_API __declspec(dllimport) 
+#endif
 
 // add headers that you want to pre-compile here
 

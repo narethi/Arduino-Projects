@@ -7,6 +7,7 @@ int main()
     try
     {
         USBDriver test("COM8");
+        std::cout << "Successfully constructed driver\n";
     }
     catch (...)
     {

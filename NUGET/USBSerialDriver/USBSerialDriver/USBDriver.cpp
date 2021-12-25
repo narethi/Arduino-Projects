@@ -11,6 +11,8 @@
 #include <assert.h>
 #include <iostream>
 
+#include "WindowsDeviceHelper.h"
+
 //This is an arbitrary value and in reality could be much larger or much smaller based on what is expected to be written to the buffer from an outside device
 const int MAX_ARRAY_SIZE = 1024;
 
@@ -24,12 +26,37 @@ HANDLE ReadHandle(void* handle)
 	return *(static_cast<HANDLE*>(handle));
 }
 
+/// <summary>
+/// 
+/// </summary>
+/// <param name="deviceHandle"></param>
+/// <returns></returns>
+DCB CheckDeviceCommStateAndReadParams(HANDLE deviceHandle)
+{	
+	if (deviceHandle == INVALID_HANDLE_VALUE)
+	{
+		OutputDebugString(L"\nFailed To Find Device \n");
+		throw USBDeviceException(USBDeviceErrorCode::FailedToFindDevice);
+	}
+
+	DCB comPortSettings = { 0 };
+	comPortSettings.DCBlength = sizeof(comPortSettings);
+
+	if (!GetCommState(deviceHandle, &comPortSettings))
+	{
+		OutputDebugString(L"\nCould not get comm state of device \n");
+		throw USBDeviceException(USBDeviceErrorCode::FailedToGetDeviceState);
+	}
+
+	return comPortSettings;
+}
+
 USBDriver::USBDriver(const char* deviceName)
 {
-	std::cout << "Starting driver initialization" << std::endl;
+	OutputDebugString(L"\nStarting driver initialization \n");
 	_deviceName = deviceName;
 	InitializeHandle();
-	std::cout << "Completed driver initialization" << std::endl;
+	OutputDebugString(L"\nCompleted driver initialization \n");
 }
 
 USBDriver::~USBDriver()
@@ -41,32 +68,22 @@ bool USBDriver::InitializeHandle()
 {
 	auto deviceName = std::string(_deviceName);
 	auto deviceNameWideString = std::wstring(deviceName.begin(), deviceName.end()); //For some reason I have to construct the wide string first, I will correct this later
-	OutputDebugString(L"\n");
-	OutputDebugString(L"looking for device: ");
+	OutputDebugString(L"\nlooking for device: ");
 	OutputDebugString(deviceNameWideString.c_str());
 	OutputDebugString(L"\n");
 	auto tempDeviceHandle = CreateFile(deviceNameWideString.c_str(), GENERIC_READ | GENERIC_WRITE, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-	if (tempDeviceHandle == INVALID_HANDLE_VALUE)
-	{
-		OutputDebugString(L"\nFailed To Find Device \n");
-		throw USBDeviceException(USBDeviceErrorCode::FailedToFindDevice);
-	}
+	
+	DCB portParams = CheckDeviceCommStateAndReadParams(tempDeviceHandle);
 
-	DCB dcbSerialParams = { 0 };
+	//Read the port settings 
+	auto portSettings = WindowsDeviceHelper::GetPortSettings(_deviceName);
 
-	dcbSerialParams.DCBlength = sizeof(dcbSerialParams);
-	if (!GetCommState(tempDeviceHandle, &dcbSerialParams))
-	{
-		OutputDebugString(L"\nCould not get comm state of device \n");
-		throw USBDeviceException(USBDeviceErrorCode::FailedToGetDeviceState);
-	}
+	portParams.BaudRate = portSettings.BaudRate;
+	portParams.ByteSize = portSettings.DataBits;
+	portParams.StopBits = portSettings.StopBits;
+	portParams.Parity = static_cast<int>(portSettings.Parity);
 
-	dcbSerialParams.BaudRate = CBR_9600;
-	dcbSerialParams.ByteSize = 8;
-	dcbSerialParams.StopBits = ONESTOPBIT;
-	dcbSerialParams.Parity = NOPARITY;
-
-	if (!SetCommState(tempDeviceHandle, &dcbSerialParams))
+	if (!SetCommState(tempDeviceHandle, &portParams))
 	{
 		OutputDebugString(L"\nCould not update the comm state of device \n");
 		throw USBDeviceException(USBDeviceErrorCode::FailedToSetDeviceState);
@@ -92,19 +109,7 @@ bool USBDriver::InitializeHandle()
 
 void USBDriver::CheckDeviceCommState()
 {
-	auto deviceHandle = ReadHandle(_deviceHandle);
-	if (deviceHandle == INVALID_HANDLE_VALUE)
-	{
-		throw USBDeviceException(USBDeviceErrorCode::FailedToFindDevice);
-	}
-
-	DCB dcbArduinoSerialParams = { 0 };
-	dcbArduinoSerialParams.DCBlength = sizeof(dcbArduinoSerialParams);
-
-	if (!GetCommState(deviceHandle, &dcbArduinoSerialParams))
-	{
-		throw USBDeviceException(USBDeviceErrorCode::FailedToGetDeviceState);
-	}
+	CheckDeviceCommStateAndReadParams(ReadHandle(_deviceHandle));
 }
 
 void USBDriver::WriteDataToDevice(const char* data, size_t dataSize)
@@ -114,6 +119,7 @@ void USBDriver::WriteDataToDevice(const char* data, size_t dataSize)
 	auto deviceHandle = ReadHandle(_deviceHandle);
 	if (!WriteFile(deviceHandle, data, dataSize, &dwWriteBuffer, NULL))
 	{
+		OutputDebugString(L"\nFailed to write to the USB Serial buffer \n");
 		throw USBDeviceException(USBDeviceErrorCode::FailedToWriteBuffer);
 	}
 }
@@ -132,6 +138,7 @@ bool USBDriver::ReadDataFromSerialBuffer(const char*& data, size_t& retrievedDat
 	DWORD dwBytesRead = 0;
 	if (!ReadFile(deviceHandle, outputBuffer, MAX_ARRAY_SIZE, &dwBytesRead, NULL))
 	{
+		OutputDebugString(L"\nFailed to read from the USB Serial buffer \n");
 		throw USBDeviceException(USBDeviceErrorCode::FailedToReadBuffer);
 	}
 	else if (dwBytesRead == 0)
@@ -144,7 +151,7 @@ bool USBDriver::ReadDataFromSerialBuffer(const char*& data, size_t& retrievedDat
 
 	std::wostringstream oss;  // uses wchar_t characters (UNICODE) this is to be able to debug out
 
-	for (int i = 0; i < dwBytesRead; i++)
+	for (DWORD i = 0; i < dwBytesRead; i++)
 	{
 		oss << std::hex << (unsigned int)(outputBuffer[i]) << " ";
 	}

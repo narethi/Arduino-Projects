@@ -22,6 +22,27 @@
     <Filter Include="Exceptions\Source Files">
       <UniqueIdentifier>{191f39a7-5869-4a0e-940c-7ae2dde15ea9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Managed Files">
+      <UniqueIdentifier>{7e5c3d27-9f32-4b7c-981b-abcf857a7b8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managed Files\Source Files">
+      <UniqueIdentifier>{c2b8ca41-fa15-428b-8687-c74e46fc5c0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managed Files\Header Files">
+      <UniqueIdentifier>{4f1a6d61-2a53-4b4b-9ab6-535731c802c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managed Files\Resource Files">
+      <UniqueIdentifier>{14779b2e-63d0-4da4-ad4f-fcd681f88ca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Enums">
+      <UniqueIdentifier>{0eeb22ed-4973-4072-8448-bc147c5f082b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helpers">
+      <UniqueIdentifier>{36d6f42b-32ec-4a8a-a90a-d920850fb7e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helpers">
+      <UniqueIdentifier>{c7ef0412-28c4-4a3b-8a8c-953c5c410c31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="USBDriver.h">
@@ -33,17 +54,26 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="USBSerialDataController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InteropTools.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="USBDeviceErrorCodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="USBDeviceException.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="USBSerialDataController.h">
+      <Filter>Managed Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="USBDeviceErrorCodes.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsDeviceHelper.h">
+      <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="PortSettings.h">
+      <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="PortParityCodes.h">
+      <Filter>Header Files\Enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -56,14 +86,17 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="USBSerialDataController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="USBDeviceException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="USBSerialDataController.cpp">
+      <Filter>Managed Files\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowsDeviceHelper.cpp">
+      <Filter>Source Files\Helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

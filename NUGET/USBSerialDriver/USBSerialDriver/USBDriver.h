@@ -1,10 +1,6 @@
 #pragma once
 
-#ifdef DRIVER_EXPORTS
-	#define DRIVER_API __declspec(dllexport) 
-#else
-	#define DRIVER_API __declspec(dllimport) 
-#endif
+#include "pch.h"
 
 class  USBDriver
 {
