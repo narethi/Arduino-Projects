@@ -1,2 +1,0 @@
-# Read Me
-This project constructs a lightweight dll that is able to send and recieve to USB devices. This DLL once built can be used as in a C# project, or in a C++ project. This solution contains the dll project, and two sample applications one for loading it into C# and one for loading it into C++.

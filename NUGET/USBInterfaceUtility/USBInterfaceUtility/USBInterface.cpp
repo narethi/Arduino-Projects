@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "USBDriver.h"
+#include "USBInterface.h"
 #include "USBDeviceException.h"
 
 #include <iomanip>
@@ -51,7 +51,7 @@ DCB CheckDeviceCommStateAndReadParams(HANDLE deviceHandle)
 	return comPortSettings;
 }
 
-USBDriver::USBDriver(const char* deviceName)
+USBInterface::USBInterface(const char* deviceName)
 {
 	OutputDebugString(L"\nStarting driver initialization \n");
 	_deviceName = deviceName;
@@ -59,12 +59,12 @@ USBDriver::USBDriver(const char* deviceName)
 	OutputDebugString(L"\nCompleted driver initialization \n");
 }
 
-USBDriver::~USBDriver()
+USBInterface::~USBInterface()
 {
 	CloseHandle(ReadHandle(_deviceHandle));
 }
 
-bool USBDriver::InitializeHandle()
+bool USBInterface::InitializeHandle()
 {
 	auto deviceName = std::string(_deviceName);
 	auto deviceNameWideString = std::wstring(deviceName.begin(), deviceName.end()); //For some reason I have to construct the wide string first, I will correct this later
@@ -107,12 +107,12 @@ bool USBDriver::InitializeHandle()
 	return true;
 }
 
-void USBDriver::CheckDeviceCommState()
+void USBInterface::CheckDeviceCommState()
 {
 	CheckDeviceCommStateAndReadParams(ReadHandle(_deviceHandle));
 }
 
-void USBDriver::WriteDataToDevice(const char* data, size_t dataSize)
+void USBInterface::WriteDataToDevice(const char* data, size_t dataSize)
 {
 	DWORD dwWriteBuffer = 0;
 	CheckDeviceCommState();
@@ -124,7 +124,7 @@ void USBDriver::WriteDataToDevice(const char* data, size_t dataSize)
 	}
 }
 
-bool USBDriver::ReadDataFromSerialBuffer(const char*& data, size_t& retrievedData)
+bool USBInterface::ReadDataFromSerialBuffer(const char*& data, size_t& retrievedData)
 {
 	OutputDebugString(L"Reading from the Serial Bus\n");
 	char outputBuffer[MAX_ARRAY_SIZE];

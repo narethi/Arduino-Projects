@@ -1,0 +1,2 @@
+# Read Me
+This is a sample C++ console application that consumes the USB Interface Utility, this currently just tries to connect to a hard coded device name, and then prints if has connected to the console window.

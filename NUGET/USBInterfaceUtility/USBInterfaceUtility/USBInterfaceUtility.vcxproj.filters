@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -34,69 +26,80 @@
     <Filter Include="Managed Files\Resource Files">
       <UniqueIdentifier>{14779b2e-63d0-4da4-ad4f-fcd681f88ca8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Enums">
+    <Filter Include="Unmanaged Files">
+      <UniqueIdentifier>{0cb546a7-d365-4f8e-bd12-dc89078deab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unmanaged Files\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Unmanaged Files\Source Files\Helpers">
+      <UniqueIdentifier>{c7ef0412-28c4-4a3b-8a8c-953c5c410c31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unmanaged Files\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Unmanaged Files\Header Files\Enums">
       <UniqueIdentifier>{0eeb22ed-4973-4072-8448-bc147c5f082b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Helpers">
+    <Filter Include="Unmanaged Files\Header Files\Helpers">
       <UniqueIdentifier>{36d6f42b-32ec-4a8a-a90a-d920850fb7e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Helpers">
-      <UniqueIdentifier>{c7ef0412-28c4-4a3b-8a8c-953c5c410c31}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="USBDriver.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="USBInterface.h">
+      <Filter>Unmanaged Files\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
+      <Filter>Unmanaged Files\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
+      <Filter>Unmanaged Files\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InteropTools.h">
-      <Filter>Header Files</Filter>
+      <Filter>Unmanaged Files\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="USBDeviceException.h">
-      <Filter>Header Files</Filter>
+      <Filter>Unmanaged Files\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="USBSerialDataController.h">
+    <ClInclude Include="USBInterfaceController.h">
       <Filter>Managed Files\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="USBDeviceErrorCodes.h">
-      <Filter>Header Files\Enums</Filter>
+      <Filter>Unmanaged Files\Header Files\Enums</Filter>
     </ClInclude>
     <ClInclude Include="WindowsDeviceHelper.h">
-      <Filter>Header Files\Helpers</Filter>
+      <Filter>Unmanaged Files\Header Files\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="PortSettings.h">
-      <Filter>Header Files\Helpers</Filter>
+      <Filter>Unmanaged Files\Header Files\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="PortParityCodes.h">
-      <Filter>Header Files\Enums</Filter>
+      <Filter>Unmanaged Files\Header Files\Enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="USBDriver.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="USBInterface.cpp">
+      <Filter>Unmanaged Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AssemblyInfo.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Unmanaged Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Unmanaged Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="USBDeviceException.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Unmanaged Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Unmanaged Files\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="USBSerialDataController.cpp">
+    <ClCompile Include="USBInterfaceController.cpp">
       <Filter>Managed Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WindowsDeviceHelper.cpp">
-      <Filter>Source Files\Helpers</Filter>
+      <Filter>Unmanaged Files\Source Files\Helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

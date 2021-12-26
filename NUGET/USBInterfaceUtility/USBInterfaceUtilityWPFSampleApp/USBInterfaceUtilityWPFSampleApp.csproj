@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\USBSerialDriver\USBSerialDriver.vcxproj" />
+    <ProjectReference Include="..\USBInterfaceUtility\USBInterfaceUtility.vcxproj" />
   </ItemGroup>
 
 </Project>

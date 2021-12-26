@@ -1,12 +1,12 @@
 #include <iostream>
-#include "USBDriver.h"
+#include "USBInterface.h"
 
 int main()
 {
     std::cout << "Starting Test!\n";
     try
     {
-        USBDriver test("COM8");
+        USBInterface test("COM8");
         std::cout << "Successfully constructed driver\n";
     }
     catch (...)
