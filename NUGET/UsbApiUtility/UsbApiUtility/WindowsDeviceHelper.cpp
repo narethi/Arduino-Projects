@@ -123,7 +123,7 @@ PortSettings WindowsDeviceHelper::GetPortSettings(const char* deviceName)
 			//There are some none error codes like ERROR_READ_MORE (234) but port settings can't be more more than 32 values 
 			RegCloseKey(portsRegistryKey);
 			delete[] readBuffer;
-			throw USBDeviceException(USBDeviceErrorCode::FailedToFindPortSettings);
+			throw UsbDeviceException(UsbDeviceErrorCode::FailedToFindPortSettings);
 		}
 
 		auto data = ProcessPortSettingsRegistryKey(readBuffer, readDataLen);

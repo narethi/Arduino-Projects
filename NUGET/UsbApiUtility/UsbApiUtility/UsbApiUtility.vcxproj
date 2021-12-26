@@ -25,7 +25,7 @@
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>USBSerialDriver</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>USBInterfaceUtility</ProjectName>
+    <ProjectName>UsbApiUtility</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -136,10 +136,10 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="PortSettings.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="USBDeviceErrorCodes.h" />
-    <ClInclude Include="USBDeviceException.h" />
-    <ClInclude Include="USBInterfaceController.h" />
-    <ClInclude Include="USBInterface.h" />
+    <ClInclude Include="UsbDeviceErrorCodes.h" />
+    <ClInclude Include="UsbDeviceException.h" />
+    <ClInclude Include="UsbApiController.h" />
+    <ClInclude Include="UsbDevice.h" />
     <ClInclude Include="WindowsDeviceHelper.h" />
   </ItemGroup>
   <ItemGroup>
@@ -156,9 +156,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="USBDeviceException.cpp" />
-    <ClCompile Include="USBInterfaceController.cpp" />
-    <ClCompile Include="USBInterface.cpp" />
+    <ClCompile Include="UsbDeviceException.cpp" />
+    <ClCompile Include="UsbApiController.cpp" />
+    <ClCompile Include="UsbDevice.cpp" />
     <ClCompile Include="WindowsDeviceHelper.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>

@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using USBInterfaceUtility;
+using UsbApiUtility;
 
 namespace ManagedSampleApplication
 {
@@ -10,7 +10,7 @@ namespace ManagedSampleApplication
     {
         public MainWindow()
         {
-            var test1 = new USBInterfaceController("COM8");
+            var test1 = new UsbApiController("COM8");
             test1.Dispose();
             InitializeComponent();
         }

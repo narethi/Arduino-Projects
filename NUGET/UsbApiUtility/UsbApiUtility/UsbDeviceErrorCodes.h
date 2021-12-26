@@ -1,6 +1,6 @@
 #pragma once
 
-enum class USBDeviceErrorCode
+enum class UsbDeviceErrorCode
 {
 	UnknownError = 0,
 	FailedToFindDevice = 1,

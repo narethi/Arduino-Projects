@@ -48,7 +48,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="USBInterface.h">
+    <ClInclude Include="UsbDevice.h">
       <Filter>Unmanaged Files\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
@@ -60,13 +60,13 @@
     <ClInclude Include="InteropTools.h">
       <Filter>Unmanaged Files\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="USBDeviceException.h">
+    <ClInclude Include="UsbDeviceException.h">
       <Filter>Unmanaged Files\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="USBInterfaceController.h">
+    <ClInclude Include="UsbApiController.h">
       <Filter>Managed Files\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="USBDeviceErrorCodes.h">
+    <ClInclude Include="UsbDeviceErrorCodes.h">
       <Filter>Unmanaged Files\Header Files\Enums</Filter>
     </ClInclude>
     <ClInclude Include="WindowsDeviceHelper.h">
@@ -80,7 +80,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="USBInterface.cpp">
+    <ClCompile Include="UsbDevice.cpp">
       <Filter>Unmanaged Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -89,13 +89,13 @@
     <ClCompile Include="pch.cpp">
       <Filter>Unmanaged Files\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="USBDeviceException.cpp">
+    <ClCompile Include="UsbDeviceException.cpp">
       <Filter>Unmanaged Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <Filter>Unmanaged Files\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="USBInterfaceController.cpp">
+    <ClCompile Include="UsbApiController.cpp">
       <Filter>Managed Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WindowsDeviceHelper.cpp">

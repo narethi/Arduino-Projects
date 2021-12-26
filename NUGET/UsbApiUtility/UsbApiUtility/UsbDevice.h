@@ -2,7 +2,7 @@
 
 #include "pch.h"
 
-class USBInterface
+class UsbDevice
 {
 private:
 	//This is a handle to the device document, this is a void pointer as the HANDLE library is a winnt object and is not aviable to be used in CLR projects
@@ -13,8 +13,8 @@ private:
 	const char* _deviceName;
 	bool InitializeHandle();
 public:
-	DRIVER_API USBInterface(const char* deviceName);
-	DRIVER_API ~USBInterface();
+	DRIVER_API UsbDevice(const char* deviceName);
+	DRIVER_API ~UsbDevice();
 	DRIVER_API void CheckDeviceCommState();
 	DRIVER_API void WriteDataToDevice(const char* data, size_t dataSize);
 	DRIVER_API bool ReadDataFromSerialBuffer(const char*& data, size_t& retrievedData);

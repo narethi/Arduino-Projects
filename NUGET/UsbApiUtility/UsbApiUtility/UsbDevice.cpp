@@ -1,6 +1,6 @@
 #include "pch.h"
-#include "USBInterface.h"
-#include "USBDeviceException.h"
+#include "UsbDevice.h"
+#include "UsbDeviceException.h"
 
 #include <iomanip>
 #include <Windows.h>
@@ -36,7 +36,7 @@ DCB CheckDeviceCommStateAndReadParams(HANDLE deviceHandle)
 	if (deviceHandle == INVALID_HANDLE_VALUE)
 	{
 		OutputDebugString(L"\nFailed To Find Device \n");
-		throw USBDeviceException(USBDeviceErrorCode::FailedToFindDevice);
+		throw UsbDeviceException(UsbDeviceErrorCode::FailedToFindDevice);
 	}
 
 	DCB comPortSettings = { 0 };
@@ -45,13 +45,13 @@ DCB CheckDeviceCommStateAndReadParams(HANDLE deviceHandle)
 	if (!GetCommState(deviceHandle, &comPortSettings))
 	{
 		OutputDebugString(L"\nCould not get comm state of device \n");
-		throw USBDeviceException(USBDeviceErrorCode::FailedToGetDeviceState);
+		throw UsbDeviceException(UsbDeviceErrorCode::FailedToGetDeviceState);
 	}
 
 	return comPortSettings;
 }
 
-USBInterface::USBInterface(const char* deviceName)
+UsbDevice::UsbDevice(const char* deviceName)
 {
 	OutputDebugString(L"\nStarting driver initialization \n");
 	_deviceName = deviceName;
@@ -59,12 +59,12 @@ USBInterface::USBInterface(const char* deviceName)
 	OutputDebugString(L"\nCompleted driver initialization \n");
 }
 
-USBInterface::~USBInterface()
+UsbDevice::~UsbDevice()
 {
 	CloseHandle(ReadHandle(_deviceHandle));
 }
 
-bool USBInterface::InitializeHandle()
+bool UsbDevice::InitializeHandle()
 {
 	auto deviceName = std::string(_deviceName);
 	auto deviceNameWideString = std::wstring(deviceName.begin(), deviceName.end()); //For some reason I have to construct the wide string first, I will correct this later
@@ -86,7 +86,7 @@ bool USBInterface::InitializeHandle()
 	if (!SetCommState(tempDeviceHandle, &portParams))
 	{
 		OutputDebugString(L"\nCould not update the comm state of device \n");
-		throw USBDeviceException(USBDeviceErrorCode::FailedToSetDeviceState);
+		throw UsbDeviceException(UsbDeviceErrorCode::FailedToSetDeviceState);
 	}
 
 	COMMTIMEOUTS timeouts = { 0 };
@@ -99,7 +99,7 @@ bool USBInterface::InitializeHandle()
 	if (!SetCommTimeouts(tempDeviceHandle, &timeouts))
 	{
 		OutputDebugString(L"\nCould not set comm timeout for the device \n");
-		throw USBDeviceException(USBDeviceErrorCode::FailedToSetTimeout);
+		throw UsbDeviceException(UsbDeviceErrorCode::FailedToSetTimeout);
 	}
 
 	_deviceHandle = new HANDLE(tempDeviceHandle);
@@ -107,12 +107,12 @@ bool USBInterface::InitializeHandle()
 	return true;
 }
 
-void USBInterface::CheckDeviceCommState()
+void UsbDevice::CheckDeviceCommState()
 {
 	CheckDeviceCommStateAndReadParams(ReadHandle(_deviceHandle));
 }
 
-void USBInterface::WriteDataToDevice(const char* data, size_t dataSize)
+void UsbDevice::WriteDataToDevice(const char* data, size_t dataSize)
 {
 	DWORD dwWriteBuffer = 0;
 	CheckDeviceCommState();
@@ -120,11 +120,11 @@ void USBInterface::WriteDataToDevice(const char* data, size_t dataSize)
 	if (!WriteFile(deviceHandle, data, dataSize, &dwWriteBuffer, NULL))
 	{
 		OutputDebugString(L"\nFailed to write to the USB Serial buffer \n");
-		throw USBDeviceException(USBDeviceErrorCode::FailedToWriteBuffer);
+		throw UsbDeviceException(UsbDeviceErrorCode::FailedToWriteBuffer);
 	}
 }
 
-bool USBInterface::ReadDataFromSerialBuffer(const char*& data, size_t& retrievedData)
+bool UsbDevice::ReadDataFromSerialBuffer(const char*& data, size_t& retrievedData)
 {
 	OutputDebugString(L"Reading from the Serial Bus\n");
 	char outputBuffer[MAX_ARRAY_SIZE];
@@ -139,7 +139,7 @@ bool USBInterface::ReadDataFromSerialBuffer(const char*& data, size_t& retrieved
 	if (!ReadFile(deviceHandle, outputBuffer, MAX_ARRAY_SIZE, &dwBytesRead, NULL))
 	{
 		OutputDebugString(L"\nFailed to read from the USB Serial buffer \n");
-		throw USBDeviceException(USBDeviceErrorCode::FailedToReadBuffer);
+		throw UsbDeviceException(UsbDeviceErrorCode::FailedToReadBuffer);
 	}
 	else if (dwBytesRead == 0)
 	{
