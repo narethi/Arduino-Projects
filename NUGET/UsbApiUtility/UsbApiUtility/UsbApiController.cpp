@@ -40,9 +40,17 @@ namespace UsbApiUtility
 		delete _device;
 	}
 
-	void UsbApiController::CheckDeviceState()
+	UsbDeviceConnectionState UsbApiController::CheckDeviceState()
 	{
-
+		try
+		{
+			_device->CheckDeviceCommState();
+		}
+		catch (UsbDeviceException e)
+		{
+			return ReadConnectionStateFromDeviceState(e.ReadError());
+		}
+		return UsbDeviceConnectionState::Connected;
 	}
 
 	void UsbApiController::SendData(System::String^ data)
@@ -59,8 +67,23 @@ namespace UsbApiUtility
 		}
 	}
 
-	void UsbApiController::ReadData()
+	List<Byte>^ UsbApiController::ReadData()
 	{
-
+		try
+		{
+			const char* data;
+			size_t dataSize;
+			_device->ReadDataFromSerialBuffer(data, dataSize);
+			auto retVal = gcnew List<Byte>();
+			for (size_t i = 0; i < dataSize; i++)
+			{
+				retVal->Add(data[i]);
+			}
+			return retVal;
+		}
+		catch (UsbDeviceException e)
+		{
+			throw gcnew UsbApiException(e.ReadError());
+		}
 	}
 }

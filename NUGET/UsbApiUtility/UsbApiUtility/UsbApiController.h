@@ -1,6 +1,9 @@
 #pragma once
 
+#include "UsbDeviceConnectionState.h"
+
 using namespace System;
+using namespace System::Collections::Generic;
 
 class UsbDevice;
 
@@ -14,9 +17,9 @@ namespace UsbApiUtility
 			UsbApiController(System::String ^ deviceName);
 			UsbApiController(const char * deviceName);
 			~UsbApiController();
-			void CheckDeviceState();
+			UsbDeviceConnectionState CheckDeviceState();
 			void SendData(System::String^ data);
-			void ReadData();
+			List<Byte>^ ReadData();
 	};
 }
 

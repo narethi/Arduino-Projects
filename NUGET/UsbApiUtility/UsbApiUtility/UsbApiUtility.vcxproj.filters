@@ -84,6 +84,9 @@
     <ClInclude Include="UsbDeviceErrorCodes.h">
       <Filter>Managed Files\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UsbDeviceConnectionState.h">
+      <Filter>Managed Files\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UsbDevice.cpp">
@@ -108,6 +111,9 @@
       <Filter>Managed Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UsbDeviceErrorCodes.cpp">
+      <Filter>Managed Files\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UsbDeviceConnectionState.cpp">
       <Filter>Managed Files\Source Files</Filter>
     </ClCompile>
   </ItemGroup>

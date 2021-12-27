@@ -138,6 +138,7 @@
     <ClInclude Include="PortSettings.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="UsbApiException.h" />
+    <ClInclude Include="UsbDeviceConnectionState.h" />
     <ClInclude Include="UsbDeviceErrorCodes.h" />
     <ClInclude Include="UsbDeviceErrors.h" />
     <ClInclude Include="UsbDeviceException.h" />
@@ -154,6 +155,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="UsbApiException.cpp" />
+    <ClCompile Include="UsbDeviceConnectionState.cpp" />
     <ClCompile Include="UsbDeviceErrorCodes.cpp" />
     <ClCompile Include="UsbDeviceException.cpp" />
     <ClCompile Include="UsbApiController.cpp" />
