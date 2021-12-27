@@ -10,6 +10,9 @@
 #include <string>
 #include <sstream>
 
+//The largest COM port name value is COM255, this is 6 characaters, 16 characters should be enough to cover any future changes
+const int MAX_COM_PORT_NAME_SIZE = 16;
+
 /// <summary>
 /// This will convert the port setting parity value to the correct enum value
 /// NOTE this is kept out of the class, inorder to keep the Windows.h out inorder
@@ -109,21 +112,25 @@ PortSettings WindowsDeviceHelper::GetPortSettings(const char* deviceName)
 		DWORD readDataLen = 32;
 		auto readBuffer = new WCHAR[readDataLen];
 
-		auto deviceNameLength = strlen(deviceName) + 1;
-		std::wstring tempDeviceName;
-		mbstowcs(&tempDeviceName[0], deviceName, deviceNameLength);
+		size_t comPortNameLength;
+		wchar_t convertedDeviceName[MAX_COM_PORT_NAME_SIZE];
+		auto isReadSuccess = mbstowcs_s(&comPortNameLength, &convertedDeviceName[0], MAX_COM_PORT_NAME_SIZE, deviceName, MAX_COM_PORT_NAME_SIZE);
+		if (isReadSuccess != ERROR_SUCCESS)
+		{
+			delete[] readBuffer;
+			throw UsbDeviceException(UsbDeviceError::InvalidPortInfoProvided);
+		}
 
-		std::wstring adjustedDeviceName;
-		adjustedDeviceName.append(tempDeviceName.c_str());
-		adjustedDeviceName.append(L":");
-		
-		auto readValue = RegQueryValueEx(portsRegistryKey, adjustedDeviceName.c_str(), NULL, NULL, reinterpret_cast<BYTE*>(readBuffer), &readDataLen);
-		if (readValue != ERROR_SUCCESS)
+		auto correctedName = std::wstring(convertedDeviceName);
+		correctedName.append(1, L':');
+
+		isReadSuccess = RegQueryValueEx(portsRegistryKey, &correctedName[0], NULL, NULL, reinterpret_cast<BYTE*>(readBuffer), &readDataLen);
+		if (isReadSuccess != ERROR_SUCCESS)
 		{
 			//There are some none error codes like ERROR_READ_MORE (234) but port settings can't be more more than 32 values 
 			RegCloseKey(portsRegistryKey);
 			delete[] readBuffer;
-			throw UsbDeviceException(UsbDeviceErrorCode::FailedToFindPortSettings);
+			throw UsbDeviceException(UsbDeviceError::FailedToFindPortSettings);
 		}
 
 		auto data = ProcessPortSettingsRegistryKey(readBuffer, readDataLen);

@@ -1,12 +1,12 @@
 #pragma once
-#include "UsbDeviceErrorCodes.h"
+#include "UsbDeviceErrors.h"
 
 class UsbDeviceException
 {
 private:
-	UsbDeviceErrorCode _error = UsbDeviceErrorCode::UnknownError;
+	UsbDeviceError _error = UsbDeviceError::UnknownError;
 public:
-	UsbDeviceException(UsbDeviceErrorCode error);
-	UsbDeviceErrorCode ReadError();
+	UsbDeviceException(UsbDeviceError error);
+	UsbDeviceError ReadError();
 };
 

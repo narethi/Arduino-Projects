@@ -21,25 +21,24 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{6A0C2C32-B717-4C4D-9128-86F4FA370CD3}</ProjectGuid>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <Keyword>ManagedCProj</Keyword>
-    <RootNamespace>USBSerialDriver</RootNamespace>
+    <Keyword>NetCoreCProj</Keyword>
+    <RootNamespace>UsbApiUtility</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>UsbApiUtility</ProjectName>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CLRSupport>true</CLRSupport>
+    <CLRSupport>NetCore</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CLRSupport>true</CLRSupport>
+    <CLRSupport>NetCore</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -81,8 +80,9 @@
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <PreprocessorDefinitions>WIN32;DRIVER_EXPORTS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <AdditionalDependencies>Advapi32.lib</AdditionalDependencies>
@@ -107,9 +107,10 @@
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <PreprocessorDefinitions>WIN32;DRIVER_EXPORTS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Optimization>MaxSpeed</Optimization>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <AdditionalDependencies>Advapi32.lib</AdditionalDependencies>
@@ -136,7 +137,9 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="PortSettings.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="UsbApiException.h" />
     <ClInclude Include="UsbDeviceErrorCodes.h" />
+    <ClInclude Include="UsbDeviceErrors.h" />
     <ClInclude Include="UsbDeviceException.h" />
     <ClInclude Include="UsbApiController.h" />
     <ClInclude Include="UsbDevice.h" />
@@ -144,18 +147,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="dllmain.cpp">
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="UsbApiException.cpp" />
+    <ClCompile Include="UsbDeviceErrorCodes.cpp" />
     <ClCompile Include="UsbDeviceException.cpp" />
     <ClCompile Include="UsbApiController.cpp" />
     <ClCompile Include="UsbDevice.cpp" />
@@ -173,11 +172,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

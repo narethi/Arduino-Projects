@@ -36,7 +36,7 @@ DCB CheckDeviceCommStateAndReadParams(HANDLE deviceHandle)
 	if (deviceHandle == INVALID_HANDLE_VALUE)
 	{
 		OutputDebugString(L"\nFailed To Find Device \n");
-		throw UsbDeviceException(UsbDeviceErrorCode::FailedToFindDevice);
+		throw UsbDeviceException(UsbDeviceError::FailedToFindDevice);
 	}
 
 	DCB comPortSettings = { 0 };
@@ -45,7 +45,7 @@ DCB CheckDeviceCommStateAndReadParams(HANDLE deviceHandle)
 	if (!GetCommState(deviceHandle, &comPortSettings))
 	{
 		OutputDebugString(L"\nCould not get comm state of device \n");
-		throw UsbDeviceException(UsbDeviceErrorCode::FailedToGetDeviceState);
+		throw UsbDeviceException(UsbDeviceError::FailedToGetDeviceState);
 	}
 
 	return comPortSettings;
@@ -53,10 +53,10 @@ DCB CheckDeviceCommStateAndReadParams(HANDLE deviceHandle)
 
 UsbDevice::UsbDevice(const char* deviceName)
 {
-	OutputDebugString(L"\nStarting driver initialization \n");
+	OutputDebugString(L"\nStarting device initialization \n");
 	_deviceName = deviceName;
 	InitializeHandle();
-	OutputDebugString(L"\nCompleted driver initialization \n");
+	OutputDebugString(L"\nCompleted device initialization \n");
 }
 
 UsbDevice::~UsbDevice()
@@ -78,15 +78,15 @@ bool UsbDevice::InitializeHandle()
 	//Read the port settings 
 	auto portSettings = WindowsDeviceHelper::GetPortSettings(_deviceName);
 
-	portParams.BaudRate = portSettings.BaudRate;
-	portParams.ByteSize = portSettings.DataBits;
-	portParams.StopBits = portSettings.StopBits;
-	portParams.Parity = static_cast<int>(portSettings.Parity);
+	portParams.BaudRate = static_cast<DWORD>(portSettings.BaudRate);
+	portParams.ByteSize = static_cast<BYTE>(portSettings.DataBits);
+	portParams.StopBits = static_cast<BYTE>(portSettings.StopBits);
+	portParams.Parity = static_cast<BYTE>(portSettings.Parity);
 
 	if (!SetCommState(tempDeviceHandle, &portParams))
 	{
 		OutputDebugString(L"\nCould not update the comm state of device \n");
-		throw UsbDeviceException(UsbDeviceErrorCode::FailedToSetDeviceState);
+		throw UsbDeviceException(UsbDeviceError::FailedToSetDeviceState);
 	}
 
 	COMMTIMEOUTS timeouts = { 0 };
@@ -99,7 +99,7 @@ bool UsbDevice::InitializeHandle()
 	if (!SetCommTimeouts(tempDeviceHandle, &timeouts))
 	{
 		OutputDebugString(L"\nCould not set comm timeout for the device \n");
-		throw UsbDeviceException(UsbDeviceErrorCode::FailedToSetTimeout);
+		throw UsbDeviceException(UsbDeviceError::FailedToSetTimeout);
 	}
 
 	_deviceHandle = new HANDLE(tempDeviceHandle);
@@ -120,7 +120,7 @@ void UsbDevice::WriteDataToDevice(const char* data, size_t dataSize)
 	if (!WriteFile(deviceHandle, data, dataSize, &dwWriteBuffer, NULL))
 	{
 		OutputDebugString(L"\nFailed to write to the USB Serial buffer \n");
-		throw UsbDeviceException(UsbDeviceErrorCode::FailedToWriteBuffer);
+		throw UsbDeviceException(UsbDeviceError::FailedToWriteBuffer);
 	}
 }
 
@@ -139,7 +139,7 @@ bool UsbDevice::ReadDataFromSerialBuffer(const char*& data, size_t& retrievedDat
 	if (!ReadFile(deviceHandle, outputBuffer, MAX_ARRAY_SIZE, &dwBytesRead, NULL))
 	{
 		OutputDebugString(L"\nFailed to read from the USB Serial buffer \n");
-		throw UsbDeviceException(UsbDeviceErrorCode::FailedToReadBuffer);
+		throw UsbDeviceException(UsbDeviceError::FailedToReadBuffer);
 	}
 	else if (dwBytesRead == 0)
 	{

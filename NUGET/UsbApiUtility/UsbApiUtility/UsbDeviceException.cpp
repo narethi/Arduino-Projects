@@ -1,12 +1,12 @@
 #include "pch.h"
 #include "UsbDeviceException.h"
 
-UsbDeviceException::UsbDeviceException(UsbDeviceErrorCode error)
+UsbDeviceException::UsbDeviceException(UsbDeviceError error)
 {
 	_error = error;
 }
 
-UsbDeviceErrorCode UsbDeviceException::ReadError()
+UsbDeviceError UsbDeviceException::ReadError()
 {
 	return _error;
 }

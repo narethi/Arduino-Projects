@@ -7,8 +7,11 @@
 /// From a device name, this information can then be used to set the configured device properties
 /// Automatically so that the library doesn't need to
 /// </summary>
-static class WindowsDeviceHelper
+class WindowsDeviceHelper
 {
-public:
-	static PortSettings GetPortSettings(const char* deviceName);
+	private:
+		//Hide the default constructor
+		WindowsDeviceHelper();
+	public:
+		static PortSettings GetPortSettings(const char* deviceName);
 };

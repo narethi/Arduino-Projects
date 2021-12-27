@@ -5,7 +5,7 @@
 struct PortSettings
 {
 	int BaudRate;
+	PortParityCode Parity;
 	char DataBits;
 	char StopBits;
-	PortParityCode Parity;
 };
