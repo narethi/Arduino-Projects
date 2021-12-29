@@ -5,6 +5,7 @@ This controls only 1 LED or a set of LEDs with the same commands (this is really
 
 ## What this contains
 * Arduino project file
+* A Schematic to make the circuit for this software
 * A couple of classes that are used to manage the LED behaviour
 
 ## How it works
