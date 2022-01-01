@@ -72,7 +72,8 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="UserMacros">
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
@@ -91,6 +92,12 @@
       <NoEntryPoint>true</NoEntryPoint>
       <SubSystem>NotSet</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>XCopy $(ProjectDir)$(AssemblyName)-$(Configuration).dll.nuspec $(SolutionDir)$(Configuration)\ /K /D /H /Y
+XCopy $(ProjectDir)$(AssemblyName)-$(Configuration).png $(SolutionDir)$(Configuration)\ /K /D /H /Y
+nuget pack $(SolutionDir)$(Configuration)\$(AssemblyName)-$(Configuration).dll.nuspec
+nuget init $(ProjectDir) $(LocalNugetRepo)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -119,6 +126,12 @@
       <NoEntryPoint>true</NoEntryPoint>
       <SubSystem>NotSet</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>XCopy $(ProjectDir)$(AssemblyName)-$(Configuration).dll.nuspec $(SolutionDir)$(Configuration)\ /K /D /H /Y
+XCopy $(ProjectDir)$(AssemblyName)-$(Configuration).png $(SolutionDir)$(Configuration)\ /K /D /H /Y
+nuget pack $(SolutionDir)$(Configuration)\$(AssemblyName)-$(Configuration).dll.nuspec
+nuget init $(ProjectDir) $(LocalNugetRepo)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -175,7 +188,15 @@
   <ItemGroup>
     <Image Include="app.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.md" />
+    <None Include="UsbApiUtility-Debug.dll.nuspec" />
+    <None Include="UsbApiUtility-Release.dll.nuspec" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <PropertyGroup Label="Local Nuget Repo">
+    <LocalNugetRepo>F:\NUGET</LocalNugetRepo>
+  </PropertyGroup>
 </Project>

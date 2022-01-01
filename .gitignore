@@ -14,9 +14,12 @@ EPaper_Windows_Application/x64
 NUGET/UsbApiUtility/.vs
 NUGET/UsbApiUtility/Debug
 NUGET/UsbApiUtility/Release
+NUGET/UsbApiUtility/UsbApiUtility/UsbApiUtility.1.0.0.nupkg
+NUGET/UsbApiUtility/UsbApiUtility/UsbApiUtility-Debug.1.0.0.nupkg
 NUGET/UsbApiUtility/UsbApiUtility/Debug
 NUGET/UsbApiUtility/UsbApiUtility/Release
 NUGET/UsbApiUtility/UsbApiUtilitySampleConsoleApp/Debug
 NUGET/UsbApiUtility/UsbApiUtilitySampleConsoleApp/Release
 NUGET/UsbApiUtility/UsbApiUtilityWpfSampleApp/obj
 NUGET/UsbApiUtility/UsbApiUtilityWpfSampleApp/bin
+NUGET/TestForNuget

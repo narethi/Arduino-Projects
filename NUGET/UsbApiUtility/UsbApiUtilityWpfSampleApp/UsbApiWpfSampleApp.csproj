@@ -12,8 +12,13 @@
     <WarningsAsErrors />
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\UsbApiUtility\UsbApiUtility.vcxproj" />
+    <PackageReference Include="UsbApiUtility-Debug" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

@@ -46,6 +46,9 @@
     <Filter Include="Unmanaged Files\Header Files\Helpers">
       <UniqueIdentifier>{36d6f42b-32ec-4a8a-a90a-d920850fb7e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Nuspec">
+      <UniqueIdentifier>{6cdee53c-f18c-4110-9e67-fe97059d5bab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UsbDevice.h">
@@ -126,5 +129,14 @@
     <Image Include="app.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UsbApiUtility-Release.dll.nuspec">
+      <Filter>Nuspec</Filter>
+    </None>
+    <None Include="UsbApiUtility-Debug.dll.nuspec">
+      <Filter>Nuspec</Filter>
+    </None>
+    <None Include="ReadMe.md" />
   </ItemGroup>
 </Project>
