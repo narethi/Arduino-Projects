@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <!-- Identifier that must be unique within the hosting gallery -->
-        <id>UsbApiUtility-Debug</id>
+        <id>UsbApiUtility-x86-Debug</id>
 
         <!-- Package version number that is used when resolving dependencies -->
         <version>0.0.0</version>
@@ -55,9 +55,11 @@
     <!-- A readme.txt to display when the package is installed -->
     <files>
 		<!-- TODO: Figure out how to automate this for C++ projects -->
+        <file src=".\UsbApiUtility.lib" target="lib" />
+		<file src=".\UsbApiUtility.exp" target="lib" />
         <file src=".\UsbApiUtility.dll" target="lib/Net5.0" />
 		<file src=".\UsbApiUtility.pdb" target="lib/Net5.0" />
-		<file src=".\Ijwhost.dll" target="lib/Net5.0" />
+        <file src=".\Ijwhost.dll" target="lib/Net5.0" />
         <file src=".\UsbApiUtility-Debug.png" target="image"/>
     </files>
 </package>

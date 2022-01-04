@@ -15,7 +15,7 @@ private:
 public:
 	DRIVER_API UsbDevice(const char* deviceName);
 	DRIVER_API ~UsbDevice();
-	DRIVER_API void CheckDeviceCommState();
-	DRIVER_API void WriteDataToDevice(const char* data, size_t dataSize);
-	DRIVER_API bool ReadDataFromSerialBuffer(const char*& data, size_t& retrievedData);
+	void DRIVER_API CheckDeviceCommState();
+	void DRIVER_API WriteDataToDevice(const char* data, size_t dataSize);
+	bool DRIVER_API ReadDataFromSerialBuffer(const char*& data, size_t& retrievedData);
 };

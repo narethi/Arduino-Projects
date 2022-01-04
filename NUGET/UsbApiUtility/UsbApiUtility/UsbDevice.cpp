@@ -27,7 +27,7 @@ HANDLE ReadHandle(void* handle)
 }
 
 /// <summary>
-/// 
+/// This checks the COM device handle and then reads the device settings and returns them
 /// </summary>
 /// <param name="deviceHandle"></param>
 /// <returns></returns>
@@ -117,7 +117,7 @@ void UsbDevice::WriteDataToDevice(const char* data, size_t dataSize)
 	DWORD dwWriteBuffer = 0;
 	CheckDeviceCommState();
 	auto deviceHandle = ReadHandle(_deviceHandle);
-	if (!WriteFile(deviceHandle, data, dataSize, &dwWriteBuffer, NULL))
+	if (!WriteFile(deviceHandle, data, static_cast<DWORD>(dataSize), &dwWriteBuffer, NULL))
 	{
 		OutputDebugString(L"\nFailed to write to the USB Serial buffer \n");
 		throw UsbDeviceException(UsbDeviceError::FailedToWriteBuffer);

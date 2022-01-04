@@ -55,9 +55,8 @@
     <!-- A readme.txt to display when the package is installed -->
     <files>
 		<!-- TODO: Figure out how to automate this for C++ projects -->
-        <file src=".\UsbApiUtility.lib" target="lib" />
         <file src=".\UsbApiUtility.dll" target="lib/Net5.0" />
-        <file src=".\Ijwhost.dll" target="lib/Net5.0" />
+		<file src=".\Ijwhost.dll" target="lib/Net5.0" />
         <file src=".\UsbApiUtility-Release.png" target="image"/>
     </files>
 </package>

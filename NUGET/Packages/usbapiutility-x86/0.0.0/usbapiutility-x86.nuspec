@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>UsbApiUtility-x86</id>
+    <version>0.0.0</version>
+    <authors>Benjamin Robert William Isherwood</authors>
+    <owners>Benjamin Robert William Isherwood</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>image\UsbApiUtility-Release.png</icon>
+    <projectUrl>https://github.com/narethi/Arduino-Projects</projectUrl>
+    <description>This provides basic access and setup to COM ports and is usable in C# and C++</description>
+    <releaseNotes>Initial Inprogress Release</releaseNotes>
+    <copyright>Copyright ©2021 Benjamin Isherwood</copyright>
+    <tags>Usb Interop C# C++ CLR Serial TTL Arduino</tags>
+    <dependencies>
+      <group targetFramework="net5.0" />
+    </dependencies>
+  </metadata>
+</package>

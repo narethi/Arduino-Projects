@@ -138,5 +138,11 @@
       <Filter>Nuspec</Filter>
     </None>
     <None Include="ReadMe.md" />
+    <None Include="UsbApiUtility-Release-Win32.dll.nuspec">
+      <Filter>Nuspec</Filter>
+    </None>
+    <None Include="UsbApiUtility-Debug-Win32.dll.nuspec">
+      <Filter>Nuspec</Filter>
+    </None>
   </ItemGroup>
 </Project>

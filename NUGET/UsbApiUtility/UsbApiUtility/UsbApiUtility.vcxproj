@@ -45,14 +45,14 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CLRSupport>true</CLRSupport>
+    <CLRSupport>NetCore</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CLRSupport>true</CLRSupport>
+    <CLRSupport>NetCore</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -77,6 +77,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -93,22 +96,33 @@
       <SubSystem>NotSet</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>XCopy $(ProjectDir)$(AssemblyName)-$(Configuration).dll.nuspec $(SolutionDir)$(Configuration)\ /K /D /H /Y
+      <Command>XCopy $(ProjectDir)$(AssemblyName)-$(Configuration)-$(Platform).dll.nuspec $(SolutionDir)$(Configuration)\ /K /D /H /Y
 XCopy $(ProjectDir)$(AssemblyName)-$(Configuration).png $(SolutionDir)$(Configuration)\ /K /D /H /Y
-nuget pack $(SolutionDir)$(Configuration)\$(AssemblyName)-$(Configuration).dll.nuspec
-nuget init $(ProjectDir) $(LocalNugetRepo)</Command>
+nuget pack $(SolutionDir)$(Configuration)\$(AssemblyName)-$(Configuration)-$(Platform).dll.nuspec
+nuget init $(ProjectDir) $(LocalNugetRepo)
+del $(ProjectDir)*.nupkg</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>_DEBUG;DRIVER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>Advapi32.lib</AdditionalDependencies>
+      <NoEntryPoint>true</NoEntryPoint>
+      <SubSystem>NotSet</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>XCopy $(ProjectDir)$(AssemblyName)-$(Configuration).dll.nuspec $(SolutionDir)$(Platform)\$(Configuration)\ /K /D /H /Y
+XCopy $(ProjectDir)$(AssemblyName)-$(Configuration).png $(SolutionDir)$(Platform)\$(Configuration)\ /K /D /H /Y
+nuget pack $(SolutionDir)$(Platform)\$(Configuration)\$(AssemblyName)-$(Configuration).dll.nuspec
+nuget init $(ProjectDir) $(LocalNugetRepo)
+del $(ProjectDir)*.nupkg</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -127,22 +141,35 @@ nuget init $(ProjectDir) $(LocalNugetRepo)</Command>
       <SubSystem>NotSet</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>XCopy $(ProjectDir)$(AssemblyName)-$(Configuration).dll.nuspec $(SolutionDir)$(Configuration)\ /K /D /H /Y
+      <Command>XCopy $(ProjectDir)$(AssemblyName)-$(Configuration)-$(Platform).dll.nuspec $(SolutionDir)$(Configuration)\ /K /D /H /Y
 XCopy $(ProjectDir)$(AssemblyName)-$(Configuration).png $(SolutionDir)$(Configuration)\ /K /D /H /Y
-nuget pack $(SolutionDir)$(Configuration)\$(AssemblyName)-$(Configuration).dll.nuspec
-nuget init $(ProjectDir) $(LocalNugetRepo)</Command>
+nuget pack $(SolutionDir)$(Configuration)\$(AssemblyName)-$(Configuration)-$(Platform).dll.nuspec
+nuget init $(ProjectDir) $(LocalNugetRepo)
+del $(ProjectDir)*.nupkg</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;DRIVER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <Optimization>MaxSpeed</Optimization>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>Advapi32.lib</AdditionalDependencies>
+      <NoEntryPoint>true</NoEntryPoint>
+      <SubSystem>NotSet</SubSystem>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
+    <PostBuildEvent>
+      <Command>XCopy $(ProjectDir)$(AssemblyName)-$(Configuration).dll.nuspec $(SolutionDir)$(Platform)\$(Configuration)\ /K /D /H /Y
+XCopy $(ProjectDir)$(AssemblyName)-$(Configuration).png $(SolutionDir)$(Platform)\$(Configuration)\ /K /D /H /Y
+nuget pack $(SolutionDir)$(Platform)\$(Configuration)\$(AssemblyName)-$(Configuration).dll.nuspec
+nuget init $(ProjectDir) $(LocalNugetRepo)
+del $(ProjectDir)*.nupkg</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="InteropTools.h" />
@@ -190,7 +217,9 @@ nuget init $(ProjectDir) $(LocalNugetRepo)</Command>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.md" />
+    <None Include="UsbApiUtility-Debug-Win32.dll.nuspec" />
     <None Include="UsbApiUtility-Debug.dll.nuspec" />
+    <None Include="UsbApiUtility-Release-Win32.dll.nuspec" />
     <None Include="UsbApiUtility-Release.dll.nuspec" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -7,12 +7,25 @@
 #ifndef PCH_H
 #define PCH_H
 // add additional preprocessors here
+#ifndef DRIVER_API
+	#ifdef _WIN64
+	#ifdef DRIVER_EXPORTS
+		#define DRIVER_API __fastcall
+	#else
+		#define DRIVER_API __fastcall(dllimport) 
+	#endif
+	#elif defined _WIN32
+		#ifdef DRIVER_EXPORTS
+			#define DRIVER_API __declspec(dllexport) 
+		#else
+			#define DRIVER_API __declspec(dllimport) 
+		#endif
+		#else
+			#define DRIVER_API
+	#endif
+#endif // !DRIVER_API
 
-#ifdef DRIVER_EXPORTS
-#define DRIVER_API __declspec(dllexport) 
-#else
-#define DRIVER_API __declspec(dllimport) 
-#endif
+
 
 //This warning is for ensuring that when an enum is used in a switch that all values are checked
 //I have some converters added to this library that rely on bridging managed and unmanaged components

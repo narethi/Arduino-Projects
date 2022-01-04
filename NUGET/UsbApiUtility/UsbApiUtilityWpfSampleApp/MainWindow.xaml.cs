@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using UsbApiUtility;
 
 namespace ManagedSampleApplication
@@ -8,11 +9,16 @@ namespace ManagedSampleApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        UsbApiController sampleController;
         public MainWindow()
         {
-            var test1 = new UsbApiController("COM8");
-            test1.Dispose();
+            sampleController = new UsbApiController("COM8");
             InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            sampleController.Dispose();
         }
     }
 }

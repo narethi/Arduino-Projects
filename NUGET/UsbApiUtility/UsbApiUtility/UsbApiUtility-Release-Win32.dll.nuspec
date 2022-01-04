@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <!-- Identifier that must be unique within the hosting gallery -->
-        <id>UsbApiUtility-Debug</id>
+        <id>UsbApiUtility-x86</id>
 
         <!-- Package version number that is used when resolving dependencies -->
         <version>0.0.0</version>
@@ -23,7 +23,7 @@
         <license type="expression">MIT</license>
         
         <!-- Icon is used in Visual Studio's package manager UI -->
-        <icon>image\UsbApiUtility-Debug.png</icon>
+        <icon>image\UsbApiUtility-Release.png</icon>
 
         <!-- 
             If true, this value prompts the user to accept the license when
@@ -38,13 +38,13 @@
             The description can be used in package manager UI. Note that the
             nuget.org gallery uses information you add in the portal. 
         -->
-        <description>[Debug Version] This provides basic access and setup to COM ports and is usable in C# and C++</description>
+        <description>This provides basic access and setup to COM ports and is usable in C# and C++</description>
 
         <!-- Copyright information -->
         <copyright>Copyright ©2021 Benjamin Isherwood</copyright>
 
         <!-- Tags appear in the gallery and can be used for tag searches -->
-        <tags>Usb Interop C# C++ CLR Serial TTL Arduino DEBUG</tags>
+        <tags>Usb Interop C# C++ CLR Serial TTL Arduino</tags>
 
         <!-- Dependencies are automatically installed when the package is installed -->
         <dependencies>
@@ -55,9 +55,9 @@
     <!-- A readme.txt to display when the package is installed -->
     <files>
 		<!-- TODO: Figure out how to automate this for C++ projects -->
+        <file src=".\UsbApiUtility.lib" target="lib" />
         <file src=".\UsbApiUtility.dll" target="lib/Net5.0" />
-		<file src=".\UsbApiUtility.pdb" target="lib/Net5.0" />
-		<file src=".\Ijwhost.dll" target="lib/Net5.0" />
-        <file src=".\UsbApiUtility-Debug.png" target="image"/>
+        <file src=".\Ijwhost.dll" target="lib/Net5.0" />
+        <file src=".\UsbApiUtility-Release.png" target="image"/>
     </files>
 </package>
