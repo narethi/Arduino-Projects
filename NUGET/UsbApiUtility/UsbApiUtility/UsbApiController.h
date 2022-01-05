@@ -18,7 +18,7 @@ namespace UsbApiUtility
 			UsbApiController(const char * deviceName);
 			~UsbApiController();
 			UsbDeviceConnectionState CheckDeviceState();
-			void SendData(System::String^ data);
+			void SendData(List<Byte>^ data);
 			List<Byte>^ ReadData();
 	};
 }

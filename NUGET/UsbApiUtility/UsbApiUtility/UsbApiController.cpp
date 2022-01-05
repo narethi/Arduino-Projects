@@ -53,10 +53,16 @@ namespace UsbApiUtility
 		return UsbDeviceConnectionState::Connected;
 	}
 
-	void UsbApiController::SendData(System::String^ data)
+	void UsbApiController::SendData(List<Byte>^ data)
 	{
-		auto messageString = Interop::MarshalString(data).c_str();
-		auto messageLength = strlen(messageString);
+		std::string dataString = "";
+		for each (auto entry in data)
+		{
+			dataString += entry;
+		}
+
+		auto messageString = dataString.c_str();//Interop::MarshalString(data).c_str();
+		auto messageLength = data->Count;
 		try
 		{
 			_device->WriteDataToDevice(messageString, messageLength);

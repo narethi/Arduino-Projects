@@ -73,7 +73,7 @@ PortSettings ProcessPortSettingsRegistryKey(PWCHAR registryData, DWORD writtenBy
 			data.Parity = ReadParityFromChar(dataToProcess[0]);
 			break;
 		case 2:
-			data.DataBits = dataToProcess[0];
+			data.DataBits = static_cast<char>(atoi(dataToProcess.c_str()));
 			break;
 		case 3:
 			switch (dataToProcess[0])
