@@ -12,9 +12,13 @@ private:
 	void* _deviceHandle = nullptr;
 	const char* _deviceName;
 	bool InitializeHandle();
+	bool _deviceIsConnected = false;
 public:
 	DRIVER_API UsbDevice(const char* deviceName);
 	DRIVER_API ~UsbDevice();
+	bool DRIVER_API ConnectDevice();
+	bool DRIVER_API ChangeDeviceName(const char* deviceName, bool connectNewDevice);
+	void DRIVER_API DisconnectDevice();
 	void DRIVER_API CheckDeviceCommState();
 	void DRIVER_API WriteDataToDevice(const char* data, size_t dataSize);
 	bool DRIVER_API ReadDataFromSerialBuffer(const char*& data, size_t& retrievedData);

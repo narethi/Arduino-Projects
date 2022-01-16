@@ -90,6 +90,9 @@
     <ClInclude Include="UsbDeviceException.h">
       <Filter>Exceptions\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ErrorInterpreter.h">
+      <Filter>Unmanaged Files\Header Files\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UsbDevice.cpp">
@@ -119,6 +122,9 @@
     <ClCompile Include="UsbDeviceException.cpp">
       <Filter>Exceptions\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ErrorInterpreter.cpp">
+      <Filter>Unmanaged Files\Source Files\Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">
@@ -131,17 +137,17 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="UsbApiUtility-Release.dll.nuspec">
-      <Filter>Nuspec</Filter>
-    </None>
-    <None Include="UsbApiUtility-Debug.dll.nuspec">
-      <Filter>Nuspec</Filter>
-    </None>
     <None Include="ReadMe.md" />
-    <None Include="UsbApiUtility-Release-Win32.dll.nuspec">
+    <None Include="Nuspec\UsbApiUtility-Debug.dll.nuspec">
       <Filter>Nuspec</Filter>
     </None>
-    <None Include="UsbApiUtility-Debug-Win32.dll.nuspec">
+    <None Include="Nuspec\UsbApiUtility-Debug-Win32.dll.nuspec">
+      <Filter>Nuspec</Filter>
+    </None>
+    <None Include="Nuspec\UsbApiUtility-Release.dll.nuspec">
+      <Filter>Nuspec</Filter>
+    </None>
+    <None Include="Nuspec\UsbApiUtility-Release-Win32.dll.nuspec">
       <Filter>Nuspec</Filter>
     </None>
   </ItemGroup>

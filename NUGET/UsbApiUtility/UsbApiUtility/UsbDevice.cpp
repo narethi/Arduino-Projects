@@ -12,9 +12,13 @@
 #include <iostream>
 
 #include "WindowsDeviceHelper.h"
+#include "ErrorInterpreter.h"
 
 //This is an arbitrary value and in reality could be much larger or much smaller based on what is expected to be written to the buffer from an outside device
 const int MAX_ARRAY_SIZE = 1024;
+
+/// This is a region for functions that are local to this CPP file not exposed to the rest of the dll
+#pragma region Local Functions
 
 /// <summary>
 /// This is a convience function to convert the void pointer handle to be a windows handle to the device document
@@ -36,7 +40,7 @@ HANDLE ReadHandle(void* handle)
 /// <param name="deviceHandle"></param>
 /// <returns></returns>
 DCB CheckDeviceCommStateAndReadParams(HANDLE deviceHandle)
-{	
+{
 	if (deviceHandle == INVALID_HANDLE_VALUE)
 	{
 		OutputDebugString(L"\nFailed To Find Device \n");
@@ -55,6 +59,64 @@ DCB CheckDeviceCommStateAndReadParams(HANDLE deviceHandle)
 	return comPortSettings;
 }
 
+/// <summary>
+/// This is a convienence function used to more easily convert to UNICODE, primarily used for DEBUG outpur
+/// </summary>
+/// <param name="input">This is the string to be converted</param>
+/// <returns>A valid wide string that can be used by UNICODE functions</returns>
+const wchar_t* ConvertToWideChar(const char* input)
+{
+	std::wostringstream oss;  // uses wchar_t characters (UNICODE) this is to be able to debug out
+	auto inputLength = strlen(input);
+	for (DWORD i = 0; i < inputLength; i++)
+	{
+		oss << std::hex << (unsigned int)(input[i]) << " ";
+	}
+
+	return oss.str().c_str();
+}
+
+#pragma endregion
+
+bool UsbDevice::ConnectDevice()
+{
+	if (!_deviceIsConnected)
+	{
+		return InitializeHandle();
+	}
+	throw UsbDeviceException(UsbDeviceError::DeviceStillConnected);
+}
+
+bool UsbDevice::ChangeDeviceName(const char* deviceName, bool connectNewDevice = true)
+{
+	try
+	{
+		DisconnectDevice();
+		_deviceName = deviceName;
+		if (connectNewDevice)
+		{
+			return InitializeHandle();
+		}
+		return true;
+	}
+	catch (UsbDeviceException e)
+	{
+		OutputDebugString(L"\nFailed to write to the USB Serial buffer\nError:");
+		OutputDebugString(ConvertToWideChar(ErrorInterpreter::ConvertErrorCodeToString(e.ReadError())));
+		return false;
+	}
+}
+
+void UsbDevice::DisconnectDevice()
+{
+	if (_deviceIsConnected)
+	{
+		CloseHandle(ReadHandle(_deviceHandle));
+		_deviceHandle = nullptr;
+		_deviceIsConnected = false;
+	}
+}
+
 UsbDevice::UsbDevice(const char* deviceName)
 {
 	OutputDebugString(L"\nStarting device initialization \n");
@@ -65,7 +127,7 @@ UsbDevice::UsbDevice(const char* deviceName)
 
 UsbDevice::~UsbDevice()
 {
-	CloseHandle(ReadHandle(_deviceHandle));
+	DisconnectDevice();
 }
 
 bool UsbDevice::InitializeHandle()
@@ -107,7 +169,7 @@ bool UsbDevice::InitializeHandle()
 	}
 
 	_deviceHandle = new HANDLE(tempDeviceHandle);
-
+	_deviceIsConnected = true;
 	return true;
 }
 
@@ -154,15 +216,8 @@ bool UsbDevice::ReadDataFromSerialBuffer(const char*& data, size_t& retrievedDat
 
 #if defined _DEBUG
 
-	std::wostringstream oss;  // uses wchar_t characters (UNICODE) this is to be able to debug out
-
-	for (DWORD i = 0; i < dwBytesRead; i++)
-	{
-		oss << std::hex << (unsigned int)(outputBuffer[i]) << " ";
-	}
-
 	OutputDebugString(L"Data Recieved\n");
-	OutputDebugString(oss.str().c_str());
+	OutputDebugString(ConvertToWideChar(outputBuffer));
 	OutputDebugString(L"\n");
 
 #endif

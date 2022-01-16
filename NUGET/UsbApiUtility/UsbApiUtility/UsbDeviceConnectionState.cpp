@@ -10,6 +10,7 @@ namespace UsbApiUtility
 		{
 		case UsbDeviceError::NoConnectedDevice:
 		case UsbDeviceError::FailedToFindDevice:
+		case UsbDeviceError::DeviceStillConnected:
 			return UsbDeviceConnectionState::Disconnected;
 		case UsbDeviceError::FailedToGetDeviceState:
 			return UsbDeviceConnectionState::InvalidDeviceParams;

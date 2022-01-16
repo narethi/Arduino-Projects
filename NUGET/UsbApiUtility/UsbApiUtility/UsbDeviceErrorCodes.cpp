@@ -25,6 +25,8 @@ namespace UsbApiUtility
 				return UsbDeviceErrorCode::InvalidPortInfoProvided;
 			case UsbDeviceError::NoConnectedDevice:
 				return UsbDeviceErrorCode::NoConnectedDevice;
+			case UsbDeviceError::DeviceStillConnected:
+				return UsbDeviceErrorCode::DeviceStillConnected;
 			case UsbDeviceError::UnknownError:
 			default:
 				return UsbDeviceErrorCode::UnknownError;
@@ -53,6 +55,8 @@ namespace UsbApiUtility
 				return UsbDeviceError::InvalidPortInfoProvided;
 			case UsbDeviceErrorCode::NoConnectedDevice:
 				return UsbDeviceError::NoConnectedDevice;
+			case UsbDeviceErrorCode::DeviceStillConnected:
+				return UsbDeviceError::DeviceStillConnected;
 			case UsbDeviceErrorCode::UnknownError:
 			default:
 				return UsbDeviceError::UnknownError;

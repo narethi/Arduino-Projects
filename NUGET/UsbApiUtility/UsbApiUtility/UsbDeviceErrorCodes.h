@@ -19,7 +19,8 @@ namespace UsbApiUtility
 		FailedToReadBuffer = 6,
 		FailedToFindPortSettings = 7,
 		InvalidPortInfoProvided = 8,
-		NoConnectedDevice = 9
+		NoConnectedDevice = 9,
+		DeviceStillConnected = 10,
 	};
 
 	UsbDeviceErrorCode ConvertToManagedCode(UsbDeviceError code);
