@@ -7,6 +7,6 @@ private:
 	UsbDeviceError _error = UsbDeviceError::UnknownError;
 public:
 	UsbDeviceException(UsbDeviceError error);
-	UsbDeviceError ReadError();
+	DRIVER_API UsbDeviceError ReadError();
 };
 

@@ -12,13 +12,20 @@ namespace ManagedSampleApplication
         UsbApiController sampleController;
         public MainWindow()
         {
-            sampleController = new UsbApiController("COM8");
+            try
+            {
+                sampleController = new UsbApiController("COM8");
+            }
+            catch (UsbApiException e) 
+            {
+                Console.WriteLine(e.Message);
+            }
             InitializeComponent();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            sampleController.Dispose();
+            sampleController?.Dispose();
         }
     }
 }

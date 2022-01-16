@@ -8,6 +8,7 @@ namespace UsbApiUtility
 	{
 		switch (error)
 		{
+		case UsbDeviceError::NoConnectedDevice:
 		case UsbDeviceError::FailedToFindDevice:
 			return UsbDeviceConnectionState::Disconnected;
 		case UsbDeviceError::FailedToGetDeviceState:

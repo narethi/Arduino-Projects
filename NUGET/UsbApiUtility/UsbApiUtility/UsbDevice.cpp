@@ -23,6 +23,10 @@ const int MAX_ARRAY_SIZE = 1024;
 /// <returns></returns>
 HANDLE ReadHandle(void* handle)
 {
+	if (handle == nullptr)
+	{
+		throw UsbDeviceException(UsbDeviceError::NoConnectedDevice);
+	}
 	return *(static_cast<HANDLE*>(handle));
 }
 

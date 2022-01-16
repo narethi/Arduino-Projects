@@ -63,9 +63,6 @@
     <ClInclude Include="InteropTools.h">
       <Filter>Unmanaged Files\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UsbDeviceException.h">
-      <Filter>Unmanaged Files\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="UsbApiController.h">
       <Filter>Managed Files\Header Files</Filter>
     </ClInclude>
@@ -90,6 +87,9 @@
     <ClInclude Include="UsbDeviceConnectionState.h">
       <Filter>Managed Files\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UsbDeviceException.h">
+      <Filter>Exceptions\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UsbDevice.cpp">
@@ -99,9 +99,6 @@
       <Filter>Unmanaged Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
-      <Filter>Unmanaged Files\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UsbDeviceException.cpp">
       <Filter>Unmanaged Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UsbApiController.cpp">
@@ -118,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="UsbDeviceConnectionState.cpp">
       <Filter>Managed Files\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UsbDeviceException.cpp">
+      <Filter>Exceptions\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,10 @@ using namespace InteropTools;
 
 namespace UsbApiUtility
 {
-	//TODO: Add in the managed exceptions, and have these functions use and propagate the new exceptions
+	/// <summary>
+	/// This is the 
+	/// </summary>
+	/// <param name="deviceName"></param>
 	UsbApiController::UsbApiController(System::String^ deviceName)
 	{
 		try
@@ -21,18 +24,6 @@ namespace UsbApiUtility
 			throw gcnew UsbApiException(e.ReadError());
 		}
 		
-	}
-
-	UsbApiController::UsbApiController(const char* deviceName)
-	{
-		try
-		{
-			_device = new UsbDevice(deviceName);
-		}
-		catch (UsbDeviceException e)
-		{
-			throw gcnew UsbApiException(e.ReadError());
-		}
 	}
 
 	UsbApiController::~UsbApiController()

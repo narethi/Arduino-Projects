@@ -9,7 +9,7 @@ private:
 	//Setting this as a void pointer allows the handle to be stored as a member of this class so that multiple Drivers can be included
 	//In a single application, the naive approach was to include the HANDLE object as a global in the USBDriver.cpp file, but that limits
 	//the number of devices that can be viewed by the application using this library
-	void* _deviceHandle;
+	void* _deviceHandle = nullptr;
 	const char* _deviceName;
 	bool InitializeHandle();
 public:

@@ -8,13 +8,7 @@
 #define PCH_H
 // add additional preprocessors here
 #ifndef DRIVER_API
-	#ifdef _WIN64
 	#ifdef DRIVER_EXPORTS
-		#define DRIVER_API __fastcall
-	#else
-		#define DRIVER_API __fastcall(dllimport) 
-	#endif
-	#elif defined _WIN32
 		#ifdef DRIVER_EXPORTS
 			#define DRIVER_API __declspec(dllexport) 
 		#else

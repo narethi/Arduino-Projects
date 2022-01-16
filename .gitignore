@@ -27,3 +27,4 @@ NUGET/UsbApiUtility/UsbApiUtilityWpfSampleApp/obj
 NUGET/UsbApiUtility/UsbApiUtilityWpfSampleApp/bin
 NUGET/TestForNuget
 Arduino_Access_Windows_Application
+.vs/slnx.sqlite

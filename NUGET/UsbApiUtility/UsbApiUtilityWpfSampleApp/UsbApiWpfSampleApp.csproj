@@ -23,7 +23,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <Optimize>true</Optimize>
   </PropertyGroup>
 
@@ -38,7 +38,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="UsbApiUtility-Debug" Version="0.0.0" />
+    <ProjectReference Include="..\UsbApiUtility\UsbApiUtility.vcxproj" />
   </ItemGroup>
 
 </Project>

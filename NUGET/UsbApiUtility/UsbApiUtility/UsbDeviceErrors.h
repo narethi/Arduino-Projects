@@ -10,5 +10,6 @@ enum class UsbDeviceError
 	FailedToWriteBuffer = 5,
 	FailedToReadBuffer = 6,
 	FailedToFindPortSettings = 7,
-	InvalidPortInfoProvided = 8
+	InvalidPortInfoProvided = 8,
+	NoConnectedDevice = 9
 };
