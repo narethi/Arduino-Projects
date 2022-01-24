@@ -64,16 +64,28 @@ DCB CheckDeviceCommStateAndReadParams(HANDLE deviceHandle)
 /// </summary>
 /// <param name="input">This is the string to be converted</param>
 /// <returns>A valid wide string that can be used by UNICODE functions</returns>
-const wchar_t* ConvertToWideChar(const char* input)
+const std::wstring ConvertToWideChar(const char* input)
 {
 	std::wostringstream oss;  // uses wchar_t characters (UNICODE) this is to be able to debug out
 	auto inputLength = strlen(input);
 	for (DWORD i = 0; i < inputLength; i++)
 	{
-		oss << std::hex << (unsigned int)(input[i]) << " ";
+		oss << input[i];
 	}
 
-	return oss.str().c_str();
+	return std::wstring(oss.str());
+}
+
+std::string FormatStringAsHex(std::string input)
+{
+	std::ostringstream ret;
+	for (auto stringIterator = input.begin(); stringIterator != input.end(); ++stringIterator)
+	{
+		ret << "0x" << std::hex << std::setw(2) << std::right << std::setfill('0') << (unsigned int) * stringIterator << " ";
+	}
+
+	auto test = ret.str();
+	return test;
 }
 
 #pragma endregion
@@ -102,7 +114,7 @@ bool UsbDevice::ChangeDeviceName(const char* deviceName, bool connectNewDevice =
 	catch (UsbDeviceException e)
 	{
 		OutputDebugString(L"\nFailed to write to the USB Serial buffer\nError:");
-		OutputDebugString(ConvertToWideChar(ErrorInterpreter::ConvertErrorCodeToString(e.ReadError())));
+		OutputDebugString(ConvertToWideChar(ErrorInterpreter::ConvertErrorCodeToString(e.ReadError())).c_str());
 		return false;
 	}
 }
@@ -180,6 +192,13 @@ void UsbDevice::CheckDeviceCommState()
 
 void UsbDevice::WriteDataToDevice(const char* data, size_t dataSize)
 {
+#ifdef _DEBUG
+	std::wstring nextLine = L"\nWriting " + ConvertToWideChar(std::to_string(dataSize).c_str()) + L" bytes";
+	OutputDebugString(nextLine.c_str());
+	std::wstring firstLine = L"\nWriting Data To Buffer: \n" + ConvertToWideChar(FormatStringAsHex(std::string(data).c_str()).c_str()) + L"\n";
+	OutputDebugString(firstLine.c_str());
+#endif
+	
 	DWORD dwWriteBuffer = 0;
 	CheckDeviceCommState();
 	auto deviceHandle = ReadHandle(_deviceHandle);
@@ -217,7 +236,7 @@ bool UsbDevice::ReadDataFromSerialBuffer(const char*& data, size_t& retrievedDat
 #if defined _DEBUG
 
 	OutputDebugString(L"Data Recieved\n");
-	OutputDebugString(ConvertToWideChar(outputBuffer));
+	OutputDebugString(ConvertToWideChar(outputBuffer).c_str());
 	OutputDebugString(L"\n");
 
 #endif

@@ -15,6 +15,7 @@ namespace ManagedSampleApplication
             try
             {
                 sampleController = new UsbApiController("COM8");
+                sampleController.SendData(new System.Collections.Generic.List<byte>() { (int)'1', (int)'a', (int)'2'});
             }
             catch (UsbApiException e) 
             {
